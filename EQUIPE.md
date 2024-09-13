@@ -21,8 +21,8 @@
 
 ### Emesson Horário
 
-- Contato: 
-- Horários disponíveis: 
+- Contato: ehs4@aluno.ifal.edu.br
+- Horários disponíveis: **15h às 17h**
 
 ### Filipe Zaidan
 
