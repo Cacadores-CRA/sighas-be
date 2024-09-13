@@ -1,11 +1,11 @@
 ## Colaboradores
 
 - Emesson Horácio dos Santos
-- 
+- Lucas Matheus Vieira Lúcio [(@Casterrr)](https://github.com/Casterrr)
 - 
 - Maelton Lima dos Santos [(@Maelton)](https://github.com/Maelton)
 
-## Responsabildiades
+## Responsabilidades
 
 ### Desenvolvimento Front-end
 
@@ -31,10 +31,10 @@
 
 ### Lucas Matheus
 
-- Contato: 
-- Horários disponíveis: 
+- Contato: lmvl2@aluno.ifal.edu.br
+- Horários disponíveis: Flexível entre ***08h às 12h***
 
 ### Maelton Lima
 
 - Contato: ***mls54@aluno.ifal.edu.br***
-- Horários disponíveis: ***06h às 08h (am)***
+- Horários disponíveis: ***06h às 08h***
