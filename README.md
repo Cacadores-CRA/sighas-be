@@ -1,4 +1,4 @@
-# SIGHAS – Sistema Integrado de Gestão de Horários e Alocação de Salas.
+# SIGHAS – Sistema Integrado de Gestão de Horários e Alocação de Salas
 
 ## Descrição
 
