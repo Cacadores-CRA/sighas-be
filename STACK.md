@@ -28,10 +28,14 @@ Detalhamento das principais tecnologias e ferramentas utilizadas no projeto.
 - Maven
 
 ### Testes
-- 
+- Spring Testing
+    - JUnit 5
+    - Mockito
+    - AssertJ
 
 ### Banco de dados
 - 
+- H2 Database *(used for tests)*
 
 ### Containerização
 - Docker
