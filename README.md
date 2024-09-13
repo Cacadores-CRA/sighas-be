@@ -1,18 +1,18 @@
-# SIGHAS – Sistema Integrado de Gestão de Horários e Alocação de Salas
+# 💻 SIGHAS – Sistema Integrado de Gestão de Horários e Alocação de Salas
 
-## Descrição
+## 🔎 Descrição
 
 Projeto desenvolvido para a disciplina de Projeto Integrador do curso Bacharelado em Sistemas de Informação do Instituto Federal de Alagoas (IFAL).
 
 Propõe o desenvolvimento de uma aplicação WEB e gratuíta, que pemitirá o fácil gerencimento das salas de aulas, disciplinas, calendário e horários da instituição.
 
-## Principais Features
+## ⚙️ Principais Features
 
 - 
 
-## Stakeholders
+## 🪆 Stakeholders
 
-### Colaboradores/Desenvolvedores
+### 🧑🏻‍🎓 Colaboradores/Desenvolvedores
 
 | Nome                                  | Foto                                                                                           | E-mail                          |
 |---------------------------------------|------------------------------------------------------------------------------------------------|---------------------------------|
@@ -21,12 +21,12 @@ Propõe o desenvolvimento de uma aplicação WEB e gratuíta, que pemitirá o f�
 | **[Filipe Zaidan Ferreira da Silva](https://github.com/filipezaidan)**   | <img src="https://avatars.githubusercontent.com/u/41112779?v=4" width="100" alt="Filipe">    | fzfs2@aluno.ifal.edu.br         |
 | **[Maelton Lima dos Santos](https://github.com/Maelton)**         | <img src="https://avatars.githubusercontent.com/u/61250761?v=4" width="100" alt="Luís">     | mls54@aluno.ifal.edu.br         |
 
-### Beneficiários
+### 👨🏻‍💻 Beneficiários
 - Instituto Federal de Alagoas
     - Departamento de Ensino (DE)
     - Coordenações dos cursos técnicos e superiores
-    - Doscentes
+    - Docentes
 
-## Prazo
+## 📅 Prazo
 
-- 
+- 01/01/2025 (Entrega Final)
