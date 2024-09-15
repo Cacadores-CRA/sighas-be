@@ -1,6 +1,6 @@
 ## Colaboradores
 
-- Emesson Horácio dos Santos
+- Emesson Horácio dos Santos [(@emessonhoracio)](https://github.com/emessonhoracio)
 - Lucas Matheus Vieira Lúcio [(@Casterrr)](https://github.com/Casterrr)
 - 
 - Maelton Lima dos Santos [(@Maelton)](https://github.com/Maelton)
