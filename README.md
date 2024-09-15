@@ -8,7 +8,13 @@ Propõe o desenvolvimento de uma aplicação WEB e gratuíta, que pemitirá o f�
 
 ## ⚙️ Principais Features
 
-- 
+Uma aplicação WEB, gratuíta, que pemitirá um fácil gerencimento de salas de aula de uma instituição de ensino, disciplinas e seus respectivos horários.
+
+- CRUD de salas de aulas
+- CRUD de disciplinas
+- CRD de cursos
+- CRUD de usuários (administradores do sistema, professores, alunos, etc)
+- Produção de representação de calendário acadêmico para cursos e suas disciplinas
 
 ## 🪆 Stakeholders
 
