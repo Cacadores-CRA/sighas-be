@@ -34,7 +34,7 @@ Detalhamento das principais tecnologias e ferramentas utilizadas no projeto.
     - AssertJ
 
 ### Banco de dados
-- 
+- PostgreSQL
 - H2 Database *(used for tests)*
 
 ### Containerização
