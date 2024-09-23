@@ -1,12 +1,21 @@
 package cacadores.ifal.sighas.api.v1.space_management.model.entity;
 
-import java.util.UUID;
-
 import cacadores.ifal.sighas.api.v1.space_management.interfaces.Laboratory;
+import cacadores.ifal.sighas.api.v1.space_management.model.enums.AcademicRoomStatus;
 
-public class ComputerLaboratory extends Room implements Laboratory {
-    private UUID id;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@NoArgsConstructor
+@Setter
+@Getter
+@Entity
+@Table(name = "tab_computer_laboratory")
+public class ComputerLaboratory extends InternalRoom implements Laboratory {
     private String code;
-    private Building building;
-    
+    private AcademicRoomStatus status;
 }

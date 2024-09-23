@@ -1,9 +1,18 @@
 package cacadores.ifal.sighas.api.v1.space_management.model.entity;
 
-import java.util.UUID;
+import cacadores.ifal.sighas.api.v1.space_management.model.enums.AcademicRoomStatus;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-public class Classroom extends Room {
-    private UUID id;
+@NoArgsConstructor
+@Getter
+@Setter
+@Entity
+@Table(name = "tab_classroom")
+public class Classroom extends InternalRoom {
     private String code;
-    private Building building;
+    private AcademicRoomStatus status;
 }

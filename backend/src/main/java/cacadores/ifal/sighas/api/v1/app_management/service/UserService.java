@@ -1,8 +1,5 @@
 package cacadores.ifal.sighas.api.v1.app_management.service;
 
-import org.hibernate.mapping.List;
-import org.hibernate.validator.constraints.UUID;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -34,13 +31,7 @@ public class UserService {
                 userCreateDTO.roles()
         );
 
-        return new UserResponseDTO(
-            user.getId(),
-            user.getName(),
-            user.getSurname(),
-            user.getEmail(),
-            user.getRoles()
-        );
+       return userToResponseDTO(user); 
     }
 
     //READ ALL
@@ -54,7 +45,12 @@ public class UserService {
     //DELETE
 
     private UserResponseDTO userToResponseDTO(User user) {
-        
+        return new UserResponseDTO(
+            user.getId(),
+            user.getName(),
+            user.getSurname(),
+            user.getEmail(),
+            user.getRoles()
+        );
     }
-
 }

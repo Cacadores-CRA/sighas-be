@@ -1,6 +1,5 @@
 package cacadores.ifal.sighas.api.v1.app_management.model.entity.user;
 
-import org.hibernate.validator.constraints.UUID;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -17,6 +16,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.UUID;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.stream.Collectors;
