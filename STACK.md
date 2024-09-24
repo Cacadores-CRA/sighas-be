@@ -6,9 +6,16 @@ Detalhamento das principais tecnologias e ferramentas utilizadas no projeto.
 ## Frontend
 
 ### Linguagem de programação
+- [TypeScript](https://www.typescriptlang.org/)
+
 ### Frameworks
+- [Next.js](https://nextjs.org/) + [shadcn/ui](https://ui.shadcn.com/) + [TailwindCSS](https://tailwindcss.com/) + [TanStack](https://tanstack.com/)
+
 ### Package managers
+- [pnpm](https://pnpm.io/pt/)
+
 ### Testes
+- [Jest](https://jestjs.io/pt-BR/)
 
 ## Backend
 
