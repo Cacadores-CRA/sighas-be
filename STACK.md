@@ -19,6 +19,10 @@ Detalhamento das principais tecnologias e ferramentas utilizadas no projeto.
 
 ## Backend
 
+### Software Architecture
+
+![](docs/images/backend-software-architecture.png)
+
 ### Linguagem de programação
 - Java *(JDK 21 LTS)*
 
