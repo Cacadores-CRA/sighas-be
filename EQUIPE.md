@@ -2,7 +2,7 @@
 
 - Emesson Horácio dos Santos [(@emessonhoracio)](https://github.com/emessonhoracio)
 - Lucas Matheus Vieira Lúcio [(@Casterrr)](https://github.com/Casterrr)
-- 
+- Filipe Zaidan Ferreira da Silva [(@filipezaidan)](https://github.com/filipezaidan)
 - Maelton Lima dos Santos [(@Maelton)](https://github.com/Maelton)
 
 ## Responsabilidades
@@ -26,8 +26,8 @@
 
 ### Filipe Zaidan
 
-- Contato: 
-- Horários disponíveis: 
+- Contato: fzfs2@aluno.ifal.edu.br
+- Horários disponíveis: **09 às 11:30h** 
 
 ### Lucas Matheus
 
