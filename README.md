@@ -4,11 +4,11 @@
 
 Projeto desenvolvido para a disciplina de Projeto Integrador do curso Bacharelado em Sistemas de Informação do Instituto Federal de Alagoas (IFAL).
 
-Propõe o desenvolvimento de uma aplicação WEB e gratuíta, que pemitirá o fácil gerencimento das salas de aulas, disciplinas, calendário e horários da instituição.
+Propõe o desenvolvimento de uma aplicação WEB, que pemitirá o fácil gerencimento das salas de aulas, disciplinas, calendário e horários da instituição.
 
 ## ⚙️ Principais Features
 
-Uma aplicação WEB, gratuíta, que pemitirá um fácil gerencimento de salas de aula de uma instituição de ensino, disciplinas e seus respectivos horários.
+Uma aplicação WEB, que pemitirá um fácil gerencimento de salas de aula de uma instituição de ensino, disciplinas e seus respectivos horários.
 
 - CRUD de salas de aulas
 - CRUD de disciplinas
