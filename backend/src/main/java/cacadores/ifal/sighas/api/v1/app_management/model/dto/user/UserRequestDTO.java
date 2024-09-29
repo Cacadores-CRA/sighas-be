@@ -2,8 +2,6 @@ package cacadores.ifal.sighas.api.v1.app_management.model.dto.user;
 
 import java.util.HashSet;
 
-import cacadores.ifal.sighas.api.v1.app_management.model.enums.UserRole;
-
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
