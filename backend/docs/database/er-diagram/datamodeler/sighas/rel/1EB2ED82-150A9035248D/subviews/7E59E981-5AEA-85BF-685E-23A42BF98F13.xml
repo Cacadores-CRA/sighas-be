@@ -1,0 +1,22 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Diagram class="oracle.dbtools.crest.swingui.relational.DPVRelational" name="sighas" id="7E59E981-5AEA-85BF-685E-23A42BF98F13">
+<createdBy>maelton</createdBy>
+<modifiedBy>maelton</modifiedBy>
+<createdTime>2024-09-29 17:11:47 UTC</createdTime>
+<autoRoute>false</autoRoute>
+<boxInbox>true</boxInbox>
+<showLegend>false</showLegend>
+<showLabels>false</showLabels>
+<showRelAttributes>false</showRelAttributes>
+<gridEnabled>false</gridEnabled>
+<showGrid>false</showGrid>
+<diagramColor>-1</diagramColor>
+<display>false</display>
+<notation>1</notation>
+<objectViews>
+<OView class="oracle.dbtools.crest.swingui.relational.TVTable" oid="8DD56D1D-2CE4-C08C-D27A-0625BE2D86EB" otype="Table" vid="7165A189-614B-1ABD-785A-D8539345A5CB">
+<hideElementsInCurrentOnly>false</hideElementsInCurrentOnly>
+<bounds x="352" y="162" width="170" height="110"/>
+</OView>
+</objectViews>
+</Diagram>
