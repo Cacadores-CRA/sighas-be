@@ -24,6 +24,6 @@ public class CourseCalendar implements Calendar {
     private UUID id;
 
     private String title;
-    private Course course;
-    private Set<Group> groups;
+//    private Course course;
+//    private Set<Group> groups;
 }

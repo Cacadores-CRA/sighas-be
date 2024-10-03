@@ -27,5 +27,5 @@ public class Course {
     private String title;
     private String shortTitle;
     private Integer quantityOfSemesters;
-    private Set<Subject> subjects;
+//    private Set<Subject> subjects;
 }

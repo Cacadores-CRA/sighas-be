@@ -1,0 +1,107 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="DA3AFA8E-D38C-5925-2967-185F72064266" name="TAB_USER">
+<createdBy>maelton</createdBy>
+<createdTime>2024-09-30 12:58:07 UTC</createdTime>
+<ownerDesignName>sighas</ownerDesignName>
+<ordsAlias>table_2</ordsAlias>
+<abbreviation>USER</abbreviation>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="id" id="3751B132-768F-F366-7602-0732025F4240">
+<createdBy>maelton</createdBy>
+<createdTime>2024-09-30 12:58:35 UTC</createdTime>
+<ownerDesignName>sighas</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>36 CHAR</dataTypeSize>
+<ownDataTypeParameters>36 CHAR,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="cpf" id="89E1744F-0204-0EC2-8DD0-A19D30FCBDDC">
+<createdBy>maelton</createdBy>
+<createdTime>2024-09-30 13:07:22 UTC</createdTime>
+<ownerDesignName>sighas</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>11 CHAR</dataTypeSize>
+<ownDataTypeParameters>11 CHAR,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<notNullConstraintName>NN_cpf_TAB_USER</notNullConstraintName>
+</Column>
+<Column name="name" id="791FACA2-C125-49A5-152C-1CD454F8B8BB">
+<createdBy>maelton</createdBy>
+<createdTime>2024-09-30 13:08:14 UTC</createdTime>
+<ownerDesignName>sighas</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>255 CHAR</dataTypeSize>
+<ownDataTypeParameters>255 CHAR,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<notNullConstraintName>NN_name_TAB_USER</notNullConstraintName>
+</Column>
+<Column name="surname" id="EF8ECF02-7B0F-BE7A-F733-06AD506B6339">
+<createdBy>maelton</createdBy>
+<createdTime>2024-09-30 13:08:55 UTC</createdTime>
+<ownerDesignName>sighas</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>255 CHAR</dataTypeSize>
+<ownDataTypeParameters>255 CHAR,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<notNullConstraintName>NN_surname_TAB_USER</notNullConstraintName>
+</Column>
+<Column name="birthdate" id="389FE043-4BD2-8347-46A6-C5ADCA678D93">
+<createdBy>maelton</createdBy>
+<createdTime>2024-09-30 13:08:55 UTC</createdTime>
+<ownerDesignName>sighas</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<notNullConstraintName>NN_birthdate_TAB_USER</notNullConstraintName>
+</Column>
+<Column name="email" id="91955C34-5F6E-3E78-6078-685E619141A3">
+<createdBy>maelton</createdBy>
+<createdTime>2024-09-30 13:09:49 UTC</createdTime>
+<ownerDesignName>sighas</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<notNullConstraintName>NN_email_TAB_USER</notNullConstraintName>
+</Column>
+<Column name="password" id="5CA41821-033A-8DA4-881D-E057FFD8B4A4">
+<createdBy>maelton</createdBy>
+<createdTime>2024-09-30 13:09:49 UTC</createdTime>
+<ownerDesignName>sighas</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>100 CHAR</dataTypeSize>
+<ownDataTypeParameters>100 CHAR,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<notNullConstraintName>NN_password_TAB_USER</notNullConstraintName>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="563CAD6D-8047-7CD3-4B2B-66E747C16212" name="PK_TAB_USER">
+<createdBy>maelton</createdBy>
+<createdTime>2024-09-30 12:58:35 UTC</createdTime>
+<ownerDesignName>sighas</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="3751B132-768F-F366-7602-0732025F4240"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

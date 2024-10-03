@@ -1,13 +1,43 @@
 package cacadores.ifal.sighas.api.v1.academic_management.model.entity;
 
 import cacadores.ifal.sighas.api.v1.academic_management.model.enums.EducationLevel;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Inheritance;
+import jakarta.persistence.InheritanceType;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+
+import jakarta.persistence.UniqueConstraint;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@NoArgsConstructor
+@Setter
+@Getter
 @Entity
+@Table(
+    name = "tab_civil_servant",
+    uniqueConstraints = @UniqueConstraint(
+        name = "un_siape_tab_civil_servant",
+        columnNames = {"siape"}
+    )
+)
+@Inheritance(strategy = InheritanceType.JOINED)
 public abstract class CivilServant extends Affiliation {
-    @Id
+
+    @Column(name = "siape", nullable = false)
     private String siape;
+
+    @Column(name = "education_level", nullable = false)
     private EducationLevel education;
+
+    @ManyToOne
+    @JoinColumn(name = "dapartment_id")
     private Department department;
+
+    //TODO: They have may have roles
 }

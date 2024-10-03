@@ -1,27 +1,30 @@
 package cacadores.ifal.sighas.api.v1.academic_management.model.entity;
 
-import cacadores.ifal.sighas.api.v1.academic_management.model.enums.UserRole;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-
 import jakarta.persistence.UniqueConstraint;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.time.LocalDate;
 import java.util.Collection;
-import java.util.List;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Setter
 @Getter
@@ -41,7 +44,6 @@ import java.util.UUID;
     }
 )
 public class User implements UserDetails {
-
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
@@ -64,12 +66,20 @@ public class User implements UserDetails {
     @Column(nullable = false)
     private String password;
 
-    private Set<UserRole> roles;
-    private Set<Affiliation> affiliations;
+//    @ManyToMany(mappedBy = "role")
+    @ManyToMany
+    @JoinTable(name = "tab_user_has_role")
+    private Set<UserRole> roles = new HashSet<>();
+
+    @OneToMany(mappedBy = "user")
+    private Set<Affiliation> affiliations = new HashSet<>();
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of();
+        return this.roles.stream()
+                         .map(UserRole::toString)
+                         .map(SimpleGrantedAuthority::new)
+                         .collect(Collectors.toList());
     }
 
     @Override

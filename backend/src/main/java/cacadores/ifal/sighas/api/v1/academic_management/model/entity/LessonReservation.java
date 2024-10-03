@@ -27,5 +27,5 @@ public class LessonReservation implements Reservation {
     private WeekDay day;
     private LocalTime startingTime;
     private LocalTime endingTime;
-    private Classroom classroom;
+//    private Classroom classroom;
 }

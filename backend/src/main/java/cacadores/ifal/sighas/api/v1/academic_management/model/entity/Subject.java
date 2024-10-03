@@ -25,5 +25,5 @@ public class Subject {
     private String code;
     private String title;
     private String shortTile;
-    private Set<Course> courses;
+//    private Set<Course> courses;
 }

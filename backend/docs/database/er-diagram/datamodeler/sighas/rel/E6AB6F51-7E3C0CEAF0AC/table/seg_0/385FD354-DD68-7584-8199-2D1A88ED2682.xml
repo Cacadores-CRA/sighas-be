@@ -1,0 +1,96 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="385FD354-DD68-7584-8199-2D1A88ED2682" name="TAB_AFFILIATION">
+<createdBy>maelton</createdBy>
+<createdTime>2024-09-30 12:53:04 UTC</createdTime>
+<ownerDesignName>sighas</ownerDesignName>
+<ordsAlias>table_1</ordsAlias>
+<abbreviation>AFFILIATION</abbreviation>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="id" id="4A77E510-0F5F-A213-6D41-0AAE4DECFC75">
+<createdBy>maelton</createdBy>
+<createdTime>2024-09-30 12:53:52 UTC</createdTime>
+<ownerDesignName>sighas</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>36 CHAR</dataTypeSize>
+<ownDataTypeParameters>36 CHAR,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="user_id" id="4C0929DE-0F47-B0A4-9DF7-A0A98AAE2E15">
+<createdBy>maelton</createdBy>
+<createdTime>2024-09-30 13:01:23 UTC</createdTime>
+<ownerDesignName>sighas</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>36 CHAR</dataTypeSize>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="C4706EFF-CD3C-2582-077C-BD43999BDB47" referredColumn="3751B132-768F-F366-7602-0732025F4240"/>
+</associations>
+</Column>
+<Column name="starting_date" id="D39FE4E4-2674-0A23-B48D-F2B74E8FFA1A">
+<createdBy>maelton</createdBy>
+<createdTime>2024-09-30 13:20:42 UTC</createdTime>
+<ownerDesignName>sighas</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<notNullConstraintName>NN_starting_date_TAB_AFFILIATION</notNullConstraintName>
+</Column>
+<Column name="ending_date" id="BB933D5C-7ACD-3F35-61C6-018659CA9AB2">
+<createdBy>maelton</createdBy>
+<createdTime>2024-09-30 13:21:27 UTC</createdTime>
+<ownerDesignName>sighas</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="status" id="ABE2B845-B641-489C-9B3D-EE9F13E8F9DC">
+<createdBy>maelton</createdBy>
+<createdTime>2024-09-30 13:22:11 UTC</createdTime>
+<ownerDesignName>sighas</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>20 CHAR</dataTypeSize>
+<ownDataTypeParameters>20 CHAR,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<notNullConstraintName>NN_status_TAB_AFFILIATION</notNullConstraintName>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="0E3EC746-0133-8FF3-F53D-86677BBDA1CF" name="PK_TAB_AFFILIATION">
+<createdBy>maelton</createdBy>
+<createdTime>2024-09-30 12:53:52 UTC</createdTime>
+<ownerDesignName>sighas</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="4A77E510-0F5F-A213-6D41-0AAE4DECFC75"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="7DF13A51-E03C-4F4A-D230-A0ADE4EF5A35" name="FK_user_id_TAB_USER_TAB_AFFILIATION">
+<createdBy>maelton</createdBy>
+<createdTime>2024-09-30 13:01:23 UTC</createdTime>
+<ownerDesignName>sighas</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="4C0929DE-0F47-B0A4-9DF7-A0A98AAE2E15"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

@@ -23,5 +23,5 @@ public class ProfessorCalendar implements Calendar {
     private UUID id;
 
     private String title;
-    private Professor professor;
+//    private Professor professor;
 }

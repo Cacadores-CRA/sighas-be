@@ -1,0 +1,16 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<FKIndexAssociation class="oracle.dbtools.crest.model.design.relational.FKIndexAssociation" directorySegmentName="seg_0" id="6F50D71C-2849-360C-AF22-C620CAA7D050" containerWithKeyObject="DFA5E6C1-2253-40BC-DB6A-EBA4841E0433" localFKIndex="D5C6B318-70DC-743D-963E-5077F175B485" name="FK_siape_TAB_CIVIL_SERVANT_TAB_COORDINATOR">
+<createdBy>maelton</createdBy>
+<createdTime>2024-09-30 13:44:55 UTC</createdTime>
+<ownerDesignName>sighas</ownerDesignName>
+<referredTableLongName>TAB_CIVIL_SERVANT</referredTableLongName>
+<deleteRule>NO ACTION</deleteRule>
+<referredTableID>CA63835A-8870-7FBA-A1B0-887C398D82F8</referredTableID>
+<keyObject>7E4ED504-6435-8DEA-AA8B-E396A7507CAF</keyObject>
+<referredKeyID>7E4ED504-6435-8DEA-AA8B-E396A7507CAF</referredKeyID>
+<mandatory>true</mandatory>
+<refColNames>siape</refColNames>
+<transferable>true</transferable>
+<rely>false</rely>
+<columnDependencyConstraintGenerateInDDL>true</columnDependencyConstraintGenerateInDDL>
+</FKIndexAssociation>

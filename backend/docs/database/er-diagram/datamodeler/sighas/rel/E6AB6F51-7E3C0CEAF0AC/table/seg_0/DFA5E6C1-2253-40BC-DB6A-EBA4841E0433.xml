@@ -1,0 +1,82 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="DFA5E6C1-2253-40BC-DB6A-EBA4841E0433" name="TAB_COORDINATOR">
+<createdBy>maelton</createdBy>
+<createdTime>2024-09-30 13:43:15 UTC</createdTime>
+<ownerDesignName>sighas</ownerDesignName>
+<ordsAlias>table_5</ordsAlias>
+<abbreviation>COORDINATOR</abbreviation>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="id" id="BA8CF3FD-36CC-B304-4A89-7E6610FD4C29">
+<createdBy>maelton</createdBy>
+<createdTime>2024-09-30 15:13:38 UTC</createdTime>
+<ownerDesignName>sighas</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>36 CHAR</dataTypeSize>
+<ownDataTypeParameters>36 CHAR,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="siape" id="0E84B9CE-515A-3A9E-6023-9D37C1AA2403">
+<createdBy>maelton</createdBy>
+<createdTime>2024-09-30 13:44:55 UTC</createdTime>
+<ownerDesignName>sighas</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>7 CHAR</dataTypeSize>
+<ownDataTypeParameters>7 CHAR,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="course" id="89763C77-093E-9466-F743-6585CC8BD985">
+<createdBy>maelton</createdBy>
+<createdTime>2024-09-30 13:44:11 UTC</createdTime>
+<ownerDesignName>sighas</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="TAB_CIVIL_SERVANT_affiliation_id" id="FA1E4E35-E7D5-38D5-9E6F-37AA1202D952">
+<createdBy>maelton</createdBy>
+<createdTime>2024-10-03 16:37:09 UTC</createdTime>
+<ownerDesignName>sighas</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>36 CHAR</dataTypeSize>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="6F50D71C-2849-360C-AF22-C620CAA7D050" referredColumn="C9F5EC6D-3037-676A-A2C3-D51DF50C0219"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="CB1C433C-AE12-36B0-2087-4FC039B794B1" name="PK_TAB_COORDINATOR">
+<createdBy>maelton</createdBy>
+<createdTime>2024-09-30 13:44:32 UTC</createdTime>
+<ownerDesignName>sighas</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="BA8CF3FD-36CC-B304-4A89-7E6610FD4C29"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="D5C6B318-70DC-743D-963E-5077F175B485" name="FK_siape_TAB_CIVIL_SERVANT_TAB_COORDINATOR">
+<createdBy>maelton</createdBy>
+<createdTime>2024-09-30 13:44:55 UTC</createdTime>
+<ownerDesignName>sighas</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="FA1E4E35-E7D5-38D5-9E6F-37AA1202D952"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

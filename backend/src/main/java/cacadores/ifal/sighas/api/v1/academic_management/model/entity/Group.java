@@ -24,9 +24,9 @@ public class Group {
     private UUID id;
 
     private String code;
-    private Subject subject;
-    private Set<Professor> professors;
-    private Set<Student> students;
-    private Set<LessonReservation> schedules;
+//    private Subject subject;
+//    private Set<Professor> professors;
+//    private Set<Student> students;
+//    private Set<LessonReservation> schedules;
     private GroupStatus status;
 }
