@@ -9,7 +9,7 @@ Detalhamento das principais tecnologias e ferramentas utilizadas no projeto.
 - [TypeScript](https://www.typescriptlang.org/)
 
 ### Frameworks
-- [Next.js](https://nextjs.org/) + [shadcn/ui](https://ui.shadcn.com/) + [TailwindCSS](https://tailwindcss.com/) + [TanStack](https://tanstack.com/)
+- [Vite](https://vite.dev/) + [shadcn/ui](https://ui.shadcn.com/) + [TailwindCSS](https://tailwindcss.com/) + [TanStack](https://tanstack.com/)
 
 ### Package managers
 - [pnpm](https://pnpm.io/pt/)
