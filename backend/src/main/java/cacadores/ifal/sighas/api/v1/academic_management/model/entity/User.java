@@ -66,7 +66,6 @@ public class User implements UserDetails {
     @Column(nullable = false)
     private String password;
 
-//    @ManyToMany(mappedBy = "role")
     @ManyToMany
     @JoinTable(name = "tab_user_has_role")
     private Set<UserRole> roles = new HashSet<>();

@@ -7,6 +7,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
@@ -15,19 +17,22 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @NoArgsConstructor
 @Setter
 @Getter
 @Entity
 @Table(
-    name = "tab_civil_servant",
+    name = "tab_public_servant",
     uniqueConstraints = @UniqueConstraint(
-        name = "un_siape_tab_civil_servant",
+        name = "un_siape_tab_public_servant",
         columnNames = {"siape"}
     )
 )
 @Inheritance(strategy = InheritanceType.JOINED)
-public abstract class CivilServant extends Affiliation {
+public abstract class PublicServant extends Affiliation {
 
     @Column(name = "siape", nullable = false)
     private String siape;
@@ -39,5 +44,7 @@ public abstract class CivilServant extends Affiliation {
     @JoinColumn(name = "dapartment_id")
     private Department department;
 
-    //TODO: They have may have roles
+    @ManyToMany
+    @JoinTable(name = "tab_public_servant_has_role")
+    private Set<PublicServantRole> roles = new HashSet<>();
 }

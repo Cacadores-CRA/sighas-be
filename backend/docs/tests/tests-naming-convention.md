@@ -1,4 +1,4 @@
-## Como nomear os métodos de testes?
+## Como nomear os métodos para testes?
 
 `operacao_estado_retorno();`
 

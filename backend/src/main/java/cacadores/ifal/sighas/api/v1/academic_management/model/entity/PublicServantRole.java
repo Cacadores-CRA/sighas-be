@@ -1,6 +1,6 @@
 package cacadores.ifal.sighas.api.v1.academic_management.model.entity;
 
-import cacadores.ifal.sighas.api.v1.academic_management.model.enums.AppRole;
+import cacadores.ifal.sighas.api.v1.academic_management.model.enums.CivilServantRole;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -21,22 +21,22 @@ import lombok.Setter;
 @Getter
 @Entity
 @Table(
-    name = "tab_user_role",
+    name = "tab_public_servant_role",
     uniqueConstraints = {
         @UniqueConstraint(
-            name = "un_role_tab_user_role",
+            name = "un_role_tab_public_servant_role",
             columnNames = {"role"}
         )
     }
 )
-public class UserRole {
+public class PublicServantRole {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "role", nullable = false)
     @Enumerated(EnumType.STRING)
-    private AppRole role;
+    private CivilServantRole role;
 
     @Override
     public String toString() {

@@ -40,5 +40,5 @@ public class Department {
     private String title;
 
     @OneToMany(mappedBy = "department", fetch = FetchType.LAZY)
-    private Set<CivilServant> civilServants = new HashSet<>();
+    private Set<PublicServant> publicServants = new HashSet<>();
 }

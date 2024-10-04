@@ -20,7 +20,7 @@ import lombok.Setter;
 import java.time.LocalDate;
 import java.util.UUID;
 
-//@NoArgsConstructor
+@NoArgsConstructor
 @Setter
 @Getter
 @Entity
