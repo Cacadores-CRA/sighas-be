@@ -90,4 +90,14 @@ public class User implements UserDetails {
     public String getUsername() {
         return this.email;
     }
+
+    public User(String cpf, String name, String surname, LocalDate birthdate, String email, String password, Set<UserRole> roles) {
+        this.cpf = cpf;
+        this.name = name;
+        this.surname = surname;
+        this.birthdate = birthdate;
+        this.email = email;
+        this.password = password;
+        this.setRoles(roles);
+    }
 }

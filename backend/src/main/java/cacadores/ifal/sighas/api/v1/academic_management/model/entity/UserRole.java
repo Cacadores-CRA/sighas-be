@@ -31,12 +31,16 @@ import lombok.Setter;
 )
 public class UserRole {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
     @Column(name = "role", nullable = false)
     @Enumerated(EnumType.STRING)
     private AppRole role;
+
+    public UserRole(AppRole role) {
+        this.id = (Integer) role.ordinal();
+        this.role = role;
+    }
 
     @Override
     public String toString() {
