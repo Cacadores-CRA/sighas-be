@@ -10,6 +10,7 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
+import jakarta.validation.constraints.Size;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -43,6 +44,7 @@ import java.util.stream.Collectors;
         )
     }
 )
+//TODO: Implement custom exceptions
 public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -64,6 +66,7 @@ public class User implements UserDetails {
     private String email;
 
     @Column(nullable = false)
+    @Size(message = "Password cannot exceed 100 characters", max = 100)
     private String password;
 
     @ManyToMany

@@ -1,30 +1,34 @@
 package cacadores.ifal.sighas.api.v1.academic_management.model.dto;
 
-import cacadores.ifal.sighas.api.v1.academic_management.model.entity.User;
-import cacadores.ifal.sighas.api.v1.academic_management.model.entity.UserRole;
+import cacadores.ifal.sighas.api.v1.academic_management.model.enums.AppRole;
+
+import io.swagger.v3.oas.annotations.media.Schema;
+
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.br.CPF;
 
 import java.time.LocalDate;
 import java.util.Set;
 
+//TODO: Implement custom exceptions
+@Schema(description = "DTO for creating or updating users")
 public record UserRequestDTO(
+    @CPF(message = "Invalid CPF")
     String cpf,
+    @NotBlank(message = "Invalid name")
     String name,
+    @NotBlank(message = "Invalid surname")
     String surname,
+    @NotBlank(message = "Invalid birthdate")
     LocalDate birthdate,
+    @Email(message = "Invalid email address")
     String email,
+    @NotBlank()
+    @Size(message = "Password must have at least 8 characters and 100 characters at maximum", min = 8, max = 100)
     String password,
-    Set<UserRole> roles
-) {
-
-    public User toUser() {
-        return new User(
-            cpf(),
-            name(),
-            surname(),
-            birthdate(),
-            email(),
-            password(),
-            roles()
-        );
-    }
-}
+    @NotBlank(message = "Role field is obligatory")
+    Set<AppRole> roles
+) {}

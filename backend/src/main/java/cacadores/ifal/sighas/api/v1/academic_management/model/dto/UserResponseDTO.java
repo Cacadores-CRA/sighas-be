@@ -1,11 +1,14 @@
 package cacadores.ifal.sighas.api.v1.academic_management.model.dto;
 
-import cacadores.ifal.sighas.api.v1.academic_management.model.entity.UserRole;
+import cacadores.ifal.sighas.api.v1.academic_management.model.enums.AppRole;
+
+import io.swagger.v3.oas.annotations.media.Schema;
 
 import java.time.LocalDate;
 import java.util.Set;
 import java.util.UUID;
 
+@Schema(description = "DTO used to represent users in responses")
 public record UserResponseDTO(
         UUID id,
         String cpf,
@@ -13,6 +16,5 @@ public record UserResponseDTO(
         String surname,
         LocalDate birthdate,
         String email,
-        Set<UserRole> roles
-) {
-}
+        Set<AppRole> roles
+) {}
