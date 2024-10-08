@@ -1,11 +1,13 @@
 package cacadores.ifal.sighas.api.v1.academic_management.controller;
 
-import cacadores.ifal.sighas.api.v1.academic_management.model.dto.UserRequestDTO;
-import cacadores.ifal.sighas.api.v1.academic_management.model.dto.UserResponseDTO;
+import cacadores.ifal.sighas.api.v1.academic_management.model.dto.user.UserRequestDTO;
+import cacadores.ifal.sighas.api.v1.academic_management.model.dto.user.UserResponseDTO;
 import cacadores.ifal.sighas.api.v1.academic_management.service.UserService;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+
+import jakarta.validation.Valid;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -34,7 +36,7 @@ public class UserController {
     //CREATE
     @Operation(summary = "Creates a new user", method = "POST")
     @PostMapping
-    public ResponseEntity<UserResponseDTO> createUser(@RequestBody UserRequestDTO userCreateDTO) {
+    public ResponseEntity<UserResponseDTO> createUser(@Valid @RequestBody UserRequestDTO userCreateDTO) {
         return ResponseEntity.status(HttpStatus.CREATED).body(service.createUser(userCreateDTO));
     }
 
@@ -53,12 +55,14 @@ public class UserController {
     }
 
     //UPDATE
+    @Operation(summary = "Updates a user", method = "UPDATE")
     @PutMapping("/{id}")
-    public ResponseEntity<UserResponseDTO> updateUser(@PathVariable UUID id, @RequestBody UserRequestDTO userUpdateDTO) {
+    public ResponseEntity<UserResponseDTO> updateUser(@PathVariable UUID id, @Valid @RequestBody UserRequestDTO userUpdateDTO) {
         return ResponseEntity.status(HttpStatus.OK).body(service.updateUser(id, userUpdateDTO));
     }
 
     //DELETE
+    @Operation(summary = "Deletes a user", method = "DELETE")
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteUser(@PathVariable UUID id) {
         service.deleteUser(id);

@@ -1,4 +1,4 @@
-package cacadores.ifal.sighas.api.v1.academic_management.model.dto;
+package cacadores.ifal.sighas.api.v1.academic_management.model.dto.user;
 
 import cacadores.ifal.sighas.api.v1.academic_management.model.enums.AppRole;
 
@@ -23,6 +23,7 @@ public record UserRequestDTO(
     @NotBlank(message = "Invalid surname")
     String surname,
     @NotBlank(message = "Invalid birthdate")
+    //TODO: Convert date format
     LocalDate birthdate,
     @Email(message = "Invalid email address")
     String email,

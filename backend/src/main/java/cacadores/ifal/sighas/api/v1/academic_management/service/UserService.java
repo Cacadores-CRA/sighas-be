@@ -1,7 +1,7 @@
 package cacadores.ifal.sighas.api.v1.academic_management.service;
 
-import cacadores.ifal.sighas.api.v1.academic_management.model.dto.UserRequestDTO;
-import cacadores.ifal.sighas.api.v1.academic_management.model.dto.UserResponseDTO;
+import cacadores.ifal.sighas.api.v1.academic_management.model.dto.user.UserRequestDTO;
+import cacadores.ifal.sighas.api.v1.academic_management.model.dto.user.UserResponseDTO;
 import cacadores.ifal.sighas.api.v1.academic_management.model.entity.User;
 import cacadores.ifal.sighas.api.v1.academic_management.model.entity.UserRole;
 import cacadores.ifal.sighas.api.v1.academic_management.repository.UserRepository;
@@ -109,6 +109,7 @@ public class UserService {
         user.setName(userRequestDTO.name());
         user.setSurname(userRequestDTO.surname());
         user.setBirthdate(userRequestDTO.birthdate());
+        //TODO: Verify pre-existent email addresses
         user.setEmail(userRequestDTO.email());
         //TODO: Encrypt password
         user.setPassword(userRequestDTO.password());

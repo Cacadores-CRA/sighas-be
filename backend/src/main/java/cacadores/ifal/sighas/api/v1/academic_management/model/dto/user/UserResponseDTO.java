@@ -1,4 +1,4 @@
-package cacadores.ifal.sighas.api.v1.academic_management.model.dto;
+package cacadores.ifal.sighas.api.v1.academic_management.model.dto.user;
 
 import cacadores.ifal.sighas.api.v1.academic_management.model.enums.AppRole;
 
@@ -14,6 +14,7 @@ public record UserResponseDTO(
         String cpf,
         String name,
         String surname,
+        //TODO: Convert date format
         LocalDate birthdate,
         String email,
         Set<AppRole> roles
