@@ -16,6 +16,7 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
+//TODO: Add @Transactional annotation on methods
 public class UserService {
     private final UserRepository repository;
     private final UserRoleRepository userRoleRepository;
@@ -33,15 +34,19 @@ public class UserService {
 
     //READ ALL
     public List<UserResponseDTO> getAllUsers() {
-        return repository.findAll().stream().map(this::toUserResponseDTO).collect(Collectors.toList());
+        return repository.findAll().stream()
+                                   .map(this::toUserResponseDTO)
+                                   .collect(Collectors.toList());
     }
 
     //READ BY ID
     //TODO: Create a custom exception
     public UserResponseDTO getUserById(UUID id) {
-        return this.toUserResponseDTO(repository.findById(id).orElseThrow(
+        return this.toUserResponseDTO(
+            repository.findById(id).orElseThrow(
                 () -> new RuntimeException("User not found")
-        ));
+            )
+        );
     }
 
     //UPDATE
@@ -75,6 +80,7 @@ public class UserService {
         if(repository.existsById(id)) {
             repository.deleteById(id);
         } else {
+            //TODO: Implement custom exception
             throw new RuntimeException("User not found");
         }
     };

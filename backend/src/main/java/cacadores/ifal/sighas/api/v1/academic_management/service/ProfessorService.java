@@ -1,21 +1,129 @@
 package cacadores.ifal.sighas.api.v1.academic_management.service;
 
+import cacadores.ifal.sighas.api.v1.academic_management.model.dto.professor.ProfessorRequestDTO;
+import cacadores.ifal.sighas.api.v1.academic_management.model.dto.professor.ProfessorResponseDTO;
+import cacadores.ifal.sighas.api.v1.academic_management.model.entity.Department;
 import cacadores.ifal.sighas.api.v1.academic_management.model.entity.Professor;
+import cacadores.ifal.sighas.api.v1.academic_management.model.entity.User;
+import cacadores.ifal.sighas.api.v1.academic_management.repository.DepartmentRepository;
 import cacadores.ifal.sighas.api.v1.academic_management.repository.ProfessorRepository;
+import cacadores.ifal.sighas.api.v1.academic_management.repository.UserRepository;
 
+import jakarta.validation.Valid;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.UUID;
+import java.util.stream.Collectors;
+
 @Service
+//TODO: Add @Transactional annotation on methods
 public class ProfessorService {
     private final ProfessorRepository repository;
-    public ProfessorService(ProfessorRepository professorRepository) {
+    private final UserRepository userRepository;
+    private final DepartmentRepository departmentRepository;
+    public ProfessorService(ProfessorRepository professorRepository, UserRepository userRepository, DepartmentRepository departmentRepository) {
         this.repository = professorRepository;
+        this.userRepository = userRepository;
+        this.departmentRepository = departmentRepository;
     }
 
     //CREATE
-    public Professor createProfessor() {
-
+    public ProfessorResponseDTO createProfessor(ProfessorRequestDTO createProfessorDTO) {
+        return this.toProfessorResponseDTO(
+            repository.save(this.toProfessor(createProfessorDTO))
+        );
     }
 
+    //READ ALL
+    public List<ProfessorResponseDTO> getAllProfessors() {
+        return repository.findAll().stream()
+                                   .map(this::toProfessorResponseDTO)
+                                   .collect(Collectors.toList());
+    }
 
+    //READ BY ID
+    public ProfessorResponseDTO getProfessorById(UUID id) {
+        return this.toProfessorResponseDTO(
+            repository.findById(id).orElseThrow(
+                () -> new RuntimeException("Professor not found")
+            )
+        );
+    }
+
+    //UPDATE
+    public ProfessorResponseDTO updateProfessor(UUID id, ProfessorRequestDTO professorUpdateDTO) {
+        //TODO: Implement custom exception
+        Professor savedProfessor = repository.findById(id).orElseThrow(
+                () -> new RuntimeException("Professor not found")
+        );
+
+        //TODO: Implement custom exception
+        User savedUser = userRepository.findById(professorUpdateDTO.userId()).orElseThrow(
+                () -> new RuntimeException("User not found")
+        );
+
+        //TODO: Implement custom exception
+        Department savedDepartment = departmentRepository.findById(professorUpdateDTO.departmentId()).orElseThrow(
+                () -> new RuntimeException("Department not found")
+        );
+
+        savedProfessor.setUser(savedUser);
+        savedProfessor.setStartingDate(professorUpdateDTO.startingDate());
+        savedProfessor.setEndingDate(professorUpdateDTO.endingDate());
+        savedProfessor.setStatus(professorUpdateDTO.status());
+        //TODO: Check pre-existent siapes
+        savedProfessor.setSiape(professorUpdateDTO.siape());
+        savedProfessor.setEducation(professorUpdateDTO.education());
+        savedProfessor.setDepartment(savedDepartment);
+        //TODO: Check pre-existent email addresses
+        savedProfessor.setInstitutionalEmail(professorUpdateDTO.institutionalEmail());
+
+        return this.toProfessorResponseDTO(repository.save(savedProfessor));
+    }
+
+    //DELETE
+    public void deleteProfessor(UUID id) {
+        if(repository.existsById(id)) {
+            repository.deleteById(id);
+        } else {
+            //TODO: Implement custom exception
+            throw new RuntimeException("Professor not found");
+        }
+    }
+
+    //ENTITY TO RESPONSE DTO
+    private ProfessorResponseDTO toProfessorResponseDTO(Professor professor) {
+        return new ProfessorResponseDTO(
+            professor.getSiape(),
+            professor.getUser().getName(),
+            professor.getStatus(),
+            professor.getEducation(),
+            professor.getInstitutionalEmail()
+        );
+    }
+
+    //REQUEST DTO TO ENTITY
+    private Professor toProfessor(ProfessorRequestDTO professorRequestDTO) {
+        //TODO: Create a custom exception
+        User professorUser = userRepository.findById(professorRequestDTO.userId()).orElseThrow(
+            () -> new RuntimeException("User not found")
+        );
+
+        Department professorDepartment = departmentRepository.findById(professorRequestDTO.departmentId()).orElseThrow(
+                () -> new RuntimeException("Department not found")
+        );
+
+        return new Professor(
+            professorUser,
+            professorRequestDTO.startingDate(),
+            professorRequestDTO.endingDate(),
+            professorRequestDTO.status(),
+            professorRequestDTO.siape(),
+            professorRequestDTO.education(),
+            //TODO: Check it out if department is obligatory
+            professorDepartment,
+            professorRequestDTO.institutionalEmail()
+        );
+    }
 }

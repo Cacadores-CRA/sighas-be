@@ -5,6 +5,7 @@ import cacadores.ifal.sighas.api.v1.academic_management.model.enums.EducationLev
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
@@ -34,7 +35,7 @@ public class Professor extends PublicServant {
     @Column(name = "institutional_email", nullable = false)
     private String institutionalEmail;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     private Set<Group> groups;
 
     public Professor(User user, LocalDate startingDate, LocalDate endingDate, AffiliationStatus status,
