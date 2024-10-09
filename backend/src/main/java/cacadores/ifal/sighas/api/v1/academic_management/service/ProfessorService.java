@@ -1,5 +1,7 @@
 package cacadores.ifal.sighas.api.v1.academic_management.service;
 
+import cacadores.ifal.sighas.api.v1.academic_management.model.dto.professor.ProfessorRequestDTO;
+import cacadores.ifal.sighas.api.v1.academic_management.model.dto.professor.ProfessorResponseDTO;
 import cacadores.ifal.sighas.api.v1.academic_management.model.entity.Professor;
 import cacadores.ifal.sighas.api.v1.academic_management.repository.ProfessorRepository;
 
@@ -13,8 +15,9 @@ public class ProfessorService {
     }
 
     //CREATE
-    public Professor createProfessor() {
-
+    public ProfessorResponseDTO createProfessor(ProfessorRequestDTO professorRequestDTO) {
+        ProfessorResponseDTO professor = null;
+        return professor;
     }
 
 
