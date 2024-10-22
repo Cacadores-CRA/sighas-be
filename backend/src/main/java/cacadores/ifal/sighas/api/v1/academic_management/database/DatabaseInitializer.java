@@ -10,6 +10,7 @@ import cacadores.ifal.sighas.api.v1.academic_management.repository.UserRoleRepos
 
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
@@ -22,10 +23,12 @@ public class DatabaseInitializer {
     private final UserRoleRepository userRoleRepository;
     private final DepartmentRepository departmentRepository;
     private final UserRepository userRepository;
-    public DatabaseInitializer(UserRoleRepository userRoleRepository, DepartmentRepository departmentRepository, UserRepository userRepository) {
+    private final PasswordEncoder passwordEncoder;
+    public DatabaseInitializer(UserRoleRepository userRoleRepository, DepartmentRepository departmentRepository, UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userRoleRepository = userRoleRepository;
         this.departmentRepository = departmentRepository;
         this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @EventListener(ApplicationReadyEvent.class)
@@ -47,34 +50,27 @@ public class DatabaseInitializer {
     }
 
     private void insertDefaultUsers() {
-        UserRole ROLE_ADMIN = userRoleRepository.findById(0).orElseThrow(
-                () -> new RuntimeException("Invalid role assignment")
-        );
-        UserRole ROLE_USER = userRoleRepository.findById(1).orElseThrow(
-                () -> new RuntimeException("Invalid role assignment")
-        );
-
         userRepository.save(
             new User(
-                "12312312345",
+                "28513719404",
                 "Ivo",
                 "Calado",
                 LocalDate.of(1980, 01, 01),
                 "ivinho.darkside@gmail.com",
-                "ivinho123",
-                new HashSet<>(Set.of(ROLE_ADMIN))
+                passwordEncoder.encode("ivinho123"),
+                new HashSet<>(Set.of(new UserRole(AppRole.ADMIN)))
             )
         );
 
         userRepository.save(
             new User(
-                "32132132132",
+                "75454597414",
                 "Ricardo",
                 "Rúbens",
                 LocalDate.of(1980, 12, 12),
                 "ricardinho.ciclope@gmail.com",
-                "ricardinho123",
-                new HashSet<>(Set.of(ROLE_USER))
+                passwordEncoder.encode("ricardinho123"),
+                new HashSet<>(Set.of(new UserRole(AppRole.USER)))
             )
         );
     }

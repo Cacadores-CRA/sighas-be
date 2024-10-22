@@ -1,5 +1,6 @@
 package cacadores.ifal.sighas.api.v1.academic_management.service;
 
+import cacadores.ifal.sighas.api.v1.academic_management.exception.user.UserUUIDNotFoundException;
 import cacadores.ifal.sighas.api.v1.academic_management.model.dto.user.UserRequestDTO;
 import cacadores.ifal.sighas.api.v1.academic_management.model.dto.user.UserResponseDTO;
 import cacadores.ifal.sighas.api.v1.academic_management.model.entity.User;
@@ -7,11 +8,12 @@ import cacadores.ifal.sighas.api.v1.academic_management.model.entity.UserRole;
 import cacadores.ifal.sighas.api.v1.academic_management.repository.UserRepository;
 import cacadores.ifal.sighas.api.v1.academic_management.repository.UserRoleRepository;
 
+import jakarta.transaction.Transactional;
+
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -20,12 +22,18 @@ import java.util.stream.Collectors;
 public class UserService {
     private final UserRepository repository;
     private final UserRoleRepository userRoleRepository;
-    public UserService(UserRepository userRepository, UserRoleRepository userRoleRepository) {
+    private final PasswordEncoder passwordEncoder;
+    public UserService(UserRepository userRepository,
+                       UserRoleRepository userRoleRepository,
+                       PasswordEncoder passwordEncoder
+    ) {
         this.repository = userRepository;
         this.userRoleRepository = userRoleRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     //CREATE
+    @Transactional
     public UserResponseDTO createUser(UserRequestDTO createUserDTO) {
         return this.toUserResponseDTO(
             repository.save(this.toUser(createUserDTO))
@@ -40,11 +48,12 @@ public class UserService {
     }
 
     //READ BY ID
-    //TODO: Create a custom exception
     public UserResponseDTO getUserById(UUID id) {
         return this.toUserResponseDTO(
             repository.findById(id).orElseThrow(
-                () -> new RuntimeException("User not found")
+                () -> new UserUUIDNotFoundException(
+                    String.format("User with UUID '%s' not found", id)
+                )
             )
         );
     }
@@ -99,28 +108,14 @@ public class UserService {
     }
 
     private User toUser(UserRequestDTO userRequestDTO) {
-        User user = new User();
-        Set<UserRole> roles = new HashSet<>();
-        //TODO: create custom exception
-        userRequestDTO.roles().forEach(
-            role -> {
-                roles.add(userRoleRepository.findById(role.ordinal()).orElseThrow(
-                        () -> new IllegalArgumentException("Invalid role assignment")
-                    )
-                );
-            }
+        return new User(
+            userRequestDTO.cpf(),
+            userRequestDTO.name(),
+            userRequestDTO.surname(),
+            userRequestDTO.birthdate(),
+            userRequestDTO.email(),
+            passwordEncoder.encode(userRequestDTO.password()),
+            userRequestDTO.roles().stream().map(UserRole::new).collect(Collectors.toSet())
         );
-
-        user.setCpf(userRequestDTO.cpf());
-        user.setName(userRequestDTO.name());
-        user.setSurname(userRequestDTO.surname());
-        user.setBirthdate(userRequestDTO.birthdate());
-        //TODO: Verify pre-existent email addresses
-        user.setEmail(userRequestDTO.email());
-        //TODO: Encrypt password
-        user.setPassword(userRequestDTO.password());
-        user.setRoles(roles);
-
-        return user;
     }
 }
