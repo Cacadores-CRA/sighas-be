@@ -6,15 +6,11 @@ import cacadores.ifal.sighas.api.v1.academic_management.model.enums.EducationLev
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import java.time.LocalDate;
 
 @NoArgsConstructor
-@Setter
-@Getter
 @Entity
 @Table(name = "tab_administrative_public_servant")
 public class AdministrativePublicServant extends PublicServant {

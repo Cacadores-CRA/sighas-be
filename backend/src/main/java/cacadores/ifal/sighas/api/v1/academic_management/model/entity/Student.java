@@ -4,6 +4,7 @@ import cacadores.ifal.sighas.api.v1.academic_management.model.enums.AffiliationS
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
@@ -46,7 +47,7 @@ public class Student extends Affiliation {
     @JoinColumn(name = "course_id")
     private Course course;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     private Set<Group> groups;
 
     public Student(User user, LocalDate startingDate, LocalDate endingDate, AffiliationStatus status,
