@@ -45,6 +45,10 @@ public abstract class PublicServant extends Affiliation {
     private Department department;
 
     @ManyToMany
-    @JoinTable(name = "tab_public_servant_has_role")
+    @JoinTable(name =
+        "tab_public_servant_has_role",
+        joinColumns = @JoinColumn(name = "public_servant_id"),
+        inverseJoinColumns = @JoinColumn(name = "public_servant_role_id")
+    )
     private Set<PublicServantRole> roles = new HashSet<>();
 }

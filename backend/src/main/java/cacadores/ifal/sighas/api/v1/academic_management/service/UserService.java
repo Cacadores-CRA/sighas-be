@@ -59,10 +59,11 @@ public class UserService {
     }
 
     //UPDATE
-    //TODO: Create a custom exception
     public UserResponseDTO updateUser(UUID id, UserRequestDTO userUpdateDTO) {
         User savedUser = repository.findById(id).orElseThrow(
-                () -> new RuntimeException("User not found")
+            () -> new UserUUIDNotFoundException(
+                String.format("User with UUID '%s' not found", id)
+            )
         );
         
         savedUser.setCpf(userUpdateDTO.cpf());
@@ -70,8 +71,8 @@ public class UserService {
         savedUser.setSurname(userUpdateDTO.surname());
         savedUser.setBirthdate(userUpdateDTO.birthdate());
         savedUser.setEmail(userUpdateDTO.email());
-        //TODO: Encrypt password
-        savedUser.setPassword(userUpdateDTO.password());
+        savedUser.setUsername(userUpdateDTO.username());
+        savedUser.setPassword(passwordEncoder.encode(userUpdateDTO.password()));
         savedUser.setRoles(
             //TODO: Implement custom exception
             userUpdateDTO.roles().stream()
@@ -89,8 +90,9 @@ public class UserService {
         if(repository.existsById(id)) {
             repository.deleteById(id);
         } else {
-            //TODO: Implement custom exception
-            throw new RuntimeException("User not found");
+            throw new UserUUIDNotFoundException(
+                String.format("User with UUID '%s' not found", id)
+            );
         }
     };
 
@@ -114,6 +116,7 @@ public class UserService {
             userRequestDTO.surname(),
             userRequestDTO.birthdate(),
             userRequestDTO.email(),
+            userRequestDTO.username(),
             passwordEncoder.encode(userRequestDTO.password()),
             userRequestDTO.roles().stream().map(UserRole::new).collect(Collectors.toSet())
         );

@@ -9,3 +9,17 @@ services:
       - POSTGRES_PASSWORD=admin
     ports:
       - "5432:5432"
+
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: pgadmin
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: "admin@pgadmin.org"
+      PGADMIN_DEFAULT_PASSWORD: "admin"
+    ports:
+      - "8081:80"
+    volumes:
+      - ./pga   dmin_data:/var/lib/pgadmin
+
+

@@ -5,6 +5,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
@@ -44,6 +45,10 @@ import java.util.stream.Collectors;
         @UniqueConstraint(
                 name = "un_email_tab_user",
                 columnNames = {"email"}
+        ),
+        @UniqueConstraint(
+            name = "un_username_tab_user",
+            columnNames = {"username"}
         )
     }
 )
@@ -74,11 +79,19 @@ public class User implements UserDetails {
 
     @NotBlank
     @Column(nullable = false)
+    private String username;
+
+    @NotBlank
+    @Column(nullable = false)
     @Size(message = "Password cannot exceed 100 characters", max = 100)
     private String password;
 
     @ManyToMany
-    @JoinTable(name = "tab_user_has_role")
+    @JoinTable(
+        name = "tab_user_has_role",
+        joinColumns = @JoinColumn(name = "user_id"),
+        inverseJoinColumns = @JoinColumn(name = "user_role_id")
+    )
     private Set<UserRole> roles = new HashSet<>();
 
     @OneToMany(mappedBy = "user")
@@ -99,15 +112,16 @@ public class User implements UserDetails {
 
     @Override
     public String getUsername() {
-        return this.email;
+        return this.username;
     }
 
-    public User(String cpf, String name, String surname, LocalDate birthdate, String email, String password, Set<UserRole> roles) {
+    public User(String cpf, String name, String surname, LocalDate birthdate, String email, String username, String password, Set<UserRole> roles) {
         this.cpf = cpf;
         this.name = name;
         this.surname = surname;
         this.birthdate = birthdate;
         this.email = email;
+        this.username = username;
         this.password = password;
         this.setRoles(roles);
     }

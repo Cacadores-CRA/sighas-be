@@ -35,6 +35,11 @@ public record UserRequestDTO(
     @Email(message = "Invalid email address")
     String email,
 
+    //TODO: Implement validation so that it only contain letters
+    @NotBlank(message = "Invalid username")
+    @Size(message = "Username must have at least 6 characters and 30 characters at maximum", min = 6, max = 30)
+    String username,
+
     @NotBlank()
     @Size(message = "Password must have at least 8 characters and 100 characters at maximum", min = 8, max = 100)
     String password,
