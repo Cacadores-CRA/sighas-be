@@ -1,8 +1,0 @@
-<?xml version = '1.0' encoding = 'UTF-8'?>
-<OSDM_Design class="oracle.dbtools.crest.model.design.Design" name="sighas" id="1FE937DC-38E0-76C9-C20C-95044D6D3ED5" version="3.5">
-<createdBy>maelton</createdBy>
-<createdTime>2024-09-30 12:47:03 UTC</createdTime>
-<ownerDesignName>sighas</ownerDesignName>
-<capitalNames>false</capitalNames>
-<designId>1FE937DC-38E0-76C9-C20C-95044D6D3ED5</designId>
-</OSDM_Design>
