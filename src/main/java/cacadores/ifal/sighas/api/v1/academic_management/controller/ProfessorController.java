@@ -46,25 +46,25 @@ public class ProfessorController {
         return ResponseEntity.status(HttpStatus.OK).body(service.getAllProfessors());
     }
 
-    //READ BY ID
-    @Operation(summary = "Gets a professor by its ID", method = "GET")
+    //READ BY AFFILIATION ID
+    @Operation(summary = "Gets a professor by its affiliation ID", method = "GET")
     @GetMapping("/{id}")
-    public ResponseEntity<ProfessorResponseDTO> getProfessorById(@PathVariable UUID id) {
-        return ResponseEntity.status(HttpStatus.OK).body(service.getProfessorById(id));
+    public ResponseEntity<ProfessorResponseDTO> getProfessorByAffiliationId(@PathVariable UUID id) {
+        return ResponseEntity.status(HttpStatus.OK).body(service.getProfessorByAffiliationId(id));
     }
 
-    //UPDATE
-    @Operation(summary = "Updates a professor", method = "UPDATE")
+    //UPDATE BY AFFILIATION ID
+    @Operation(summary = "Updates a professor by its affiliation id", method = "UPDATE")
     @PutMapping("/{id}")
-    public ResponseEntity<ProfessorResponseDTO> updateProfessor(@PathVariable UUID id, @Valid @RequestBody ProfessorRequestDTO professorUpdateDTO) {
-        return ResponseEntity.status(HttpStatus.OK).body(service.updateProfessor(id, professorUpdateDTO));
+    public ResponseEntity<ProfessorResponseDTO> updateProfessorByAffiliationId(@PathVariable UUID id, @Valid @RequestBody ProfessorRequestDTO professorUpdateDTO) {
+        return ResponseEntity.status(HttpStatus.OK).body(service.updateProfessorByAffiliationId(id, professorUpdateDTO));
     }
 
-    //DELETE
+    //DELETE BY AFFILIATION ID
     @Operation(summary = "Deletes a professor by its ID", method = "DELETE")
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteProfessor(@PathVariable UUID id) {
-        service.deleteProfessor(id);
+    public ResponseEntity<Void> deleteProfessorByAffiliationId(@PathVariable UUID id) {
+        service.deleteProfessorByAffiliationId(id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 }

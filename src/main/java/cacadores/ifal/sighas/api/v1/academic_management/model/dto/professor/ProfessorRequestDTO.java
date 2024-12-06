@@ -16,18 +16,25 @@ import java.util.UUID;
 public record ProfessorRequestDTO(
         @NotNull(message = "User ID is obligatory")
         UUID userId,
+
         @NotNull(message = "Staring date is obligatory")
         LocalDate startingDate,
+
         LocalDate endingDate,
+
         @NotNull(message = "Invalid status")
         AffiliationStatus status,
+
         @NotBlank(message = "Siape field is obligatory")
         //TODO: Implement RegExr
         String siape,
+
         @NotNull(message = "Invalid education level")
         EducationLevel education,
+
         @NotNull(message = "Department ID is obligatory")
         UUID departmentId,
+
         @Email(message = "Invalid email address")
         //TODO: Implement RegExr
         String institutionalEmail

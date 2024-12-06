@@ -1,5 +1,7 @@
 package cacadores.ifal.sighas.api.v1.academic_management.service;
 
+import cacadores.ifal.sighas.api.v1.academic_management.exception.affiliation.AffiliationUUIDNotFoundException;
+import cacadores.ifal.sighas.api.v1.academic_management.exception.user.UserUUIDNotFoundException;
 import cacadores.ifal.sighas.api.v1.academic_management.model.dto.professor.ProfessorRequestDTO;
 import cacadores.ifal.sighas.api.v1.academic_management.model.dto.professor.ProfessorResponseDTO;
 import cacadores.ifal.sighas.api.v1.academic_management.model.entity.Department;
@@ -9,7 +11,6 @@ import cacadores.ifal.sighas.api.v1.academic_management.repository.DepartmentRep
 import cacadores.ifal.sighas.api.v1.academic_management.repository.ProfessorRepository;
 import cacadores.ifal.sighas.api.v1.academic_management.repository.UserRepository;
 
-import jakarta.validation.Valid;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -43,24 +44,28 @@ public class ProfessorService {
     }
 
     //READ BY ID
-    public ProfessorResponseDTO getProfessorById(UUID id) {
+    public ProfessorResponseDTO getProfessorByAffiliationId(UUID affiliationId) {
         return this.toProfessorResponseDTO(
-            repository.findById(id).orElseThrow(
-                () -> new RuntimeException("Professor not found")
+            repository.findById(affiliationId).orElseThrow(
+                () -> new AffiliationUUIDNotFoundException(
+                    String.format("Professor with affiliation id '%s' not found", affiliationId)
+                )
             )
         );
     }
 
-    //UPDATE
-    public ProfessorResponseDTO updateProfessor(UUID id, ProfessorRequestDTO professorUpdateDTO) {
-        //TODO: Implement custom exception
-        Professor savedProfessor = repository.findById(id).orElseThrow(
-                () -> new RuntimeException("Professor not found")
+    //UPDATE BY AFFILIATION ID
+    public ProfessorResponseDTO updateProfessorByAffiliationId(UUID affiliationId, ProfessorRequestDTO professorUpdateDTO) {
+        Professor savedProfessor = repository.findById(affiliationId).orElseThrow(
+                () -> new AffiliationUUIDNotFoundException(
+                    String.format("Professor with affiliation id '%s' not found", affiliationId)
+                )
         );
 
-        //TODO: Implement custom exception
         User savedUser = userRepository.findById(professorUpdateDTO.userId()).orElseThrow(
-                () -> new RuntimeException("User not found")
+            () -> new UserUUIDNotFoundException(
+                String.format("User with id '%s' not found", professorUpdateDTO.userId())
+            )
         );
 
         //TODO: Implement custom exception
@@ -72,23 +77,22 @@ public class ProfessorService {
         savedProfessor.setStartingDate(professorUpdateDTO.startingDate());
         savedProfessor.setEndingDate(professorUpdateDTO.endingDate());
         savedProfessor.setStatus(professorUpdateDTO.status());
-        //TODO: Check pre-existent siapes
         savedProfessor.setSiape(professorUpdateDTO.siape());
         savedProfessor.setEducation(professorUpdateDTO.education());
         savedProfessor.setDepartment(savedDepartment);
-        //TODO: Check pre-existent email addresses
         savedProfessor.setInstitutionalEmail(professorUpdateDTO.institutionalEmail());
 
         return this.toProfessorResponseDTO(repository.save(savedProfessor));
     }
 
-    //DELETE
-    public void deleteProfessor(UUID id) {
-        if(repository.existsById(id)) {
-            repository.deleteById(id);
+    //DELETE BY AFFILIATION ID
+    public void deleteProfessorByAffiliationId(UUID affiliationId) {
+        if(repository.existsById(affiliationId)) {
+            repository.deleteById(affiliationId);
         } else {
-            //TODO: Implement custom exception
-            throw new RuntimeException("Professor not found");
+            throw new AffiliationUUIDNotFoundException(
+                String.format("Professor with affiliation id '%s' not found", affiliationId)
+            );
         }
     }
 
@@ -105,9 +109,10 @@ public class ProfessorService {
 
     //REQUEST DTO TO ENTITY
     private Professor toProfessor(ProfessorRequestDTO professorRequestDTO) {
-        //TODO: Create a custom exception
         User professorUser = userRepository.findById(professorRequestDTO.userId()).orElseThrow(
-            () -> new RuntimeException("User not found")
+            () -> new UserUUIDNotFoundException(
+                String.format("User with UUID '%s' not found", professorRequestDTO.userId())
+            )
         );
 
         Department professorDepartment = departmentRepository.findById(professorRequestDTO.departmentId()).orElseThrow(
