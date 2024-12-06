@@ -16,6 +16,7 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
+//TODO: Add @Transactional annotation on methods
 public class StudentService {
     private final StudentRepository repository;
     private final UserRepository userRepository;

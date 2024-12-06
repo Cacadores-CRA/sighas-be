@@ -10,6 +10,7 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
+import jakarta.validation.constraints.Pattern;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -37,6 +38,7 @@ import java.util.Set;
 )
 public class Student extends Affiliation {
 
+    @Pattern(regexp = "^\\d{10}$", message = "The enrollment code must contain exactly 10 numeric digits")
     @Column(name = "enrollment", nullable = false)
     private String enrollment;
 

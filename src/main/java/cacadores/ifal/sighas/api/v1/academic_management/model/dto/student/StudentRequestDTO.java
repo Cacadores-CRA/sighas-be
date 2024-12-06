@@ -29,7 +29,7 @@ public record StudentRequestDTO(
 
     @NotBlank(message = "Invalid enrollment")
     @Size(message = "The enrollment code must have exactly 10 digits", min = 10, max = 10)
-    @Pattern(regexp = "^\\d{10}$", message = "The enrollment code must contain only numeric digits")
+    @Pattern(regexp = "^\\d{10}$", message = "The enrollment code must contain exactly 10 numeric digits")
     String enrollment,
 
     @Email(message = "Invalid email address")

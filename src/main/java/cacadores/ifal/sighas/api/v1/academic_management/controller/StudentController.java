@@ -34,7 +34,7 @@ public class StudentController {
     }
 
     //CREATE
-    @Operation(description = "Creates a student", method = "POST")
+    @Operation(summary = "Creates a student", method = "POST")
     @PostMapping
     public ResponseEntity<StudentResponseDTO> createStudent(@Valid @RequestBody StudentRequestDTO studentCreateDTO) {
         return ResponseEntity.status(HttpStatus.CREATED).body(service.createStudent(studentCreateDTO));
@@ -57,7 +57,7 @@ public class StudentController {
     //UPDATE BY AFFILIATION ID
     @Operation(summary = "Updates a student by its affiliation id", method = "UPDATE")
     @PutMapping("/{id}")
-    public ResponseEntity<StudentResponseDTO> updateStudentByAffiliationId(@PathVariable UUID id, @RequestBody StudentRequestDTO studentUpdateDTO) {
+    public ResponseEntity<StudentResponseDTO> updateStudentByAffiliationId(@PathVariable UUID id, @Valid @RequestBody StudentRequestDTO studentUpdateDTO) {
         return ResponseEntity.status(HttpStatus.OK).body(service.updateStudentByAffiliationId(id, studentUpdateDTO));
     }
 

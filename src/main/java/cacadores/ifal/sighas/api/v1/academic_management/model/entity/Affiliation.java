@@ -4,6 +4,8 @@ import cacadores.ifal.sighas.api.v1.academic_management.model.enums.AffiliationS
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -42,5 +44,6 @@ public abstract class Affiliation {
     private LocalDate endingDate;
 
     @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
     private AffiliationStatus status;
 }

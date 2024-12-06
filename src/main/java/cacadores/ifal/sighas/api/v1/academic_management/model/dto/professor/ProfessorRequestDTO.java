@@ -8,6 +8,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 
 import java.time.LocalDate;
 import java.util.UUID;
@@ -26,7 +27,7 @@ public record ProfessorRequestDTO(
         AffiliationStatus status,
 
         @NotBlank(message = "Siape field is obligatory")
-        //TODO: Implement RegExr
+        @Pattern(message = "SIAPE code must contain exactly 7 numeric digits", regexp = "^\\d{7}$")
         String siape,
 
         @NotNull(message = "Invalid education level")

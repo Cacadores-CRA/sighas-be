@@ -26,6 +26,7 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/v1/professors")
 @Tag(name = "Professors", description = "Endpoints for professors management")
+//TODO: Complete documentation
 public class ProfessorController {
     private final ProfessorService service;
     public ProfessorController(ProfessorService professorService) {
@@ -33,7 +34,7 @@ public class ProfessorController {
     }
 
     //CREATE
-    @Operation(description = "Creates a professor", method = "POST")
+    @Operation(summary = "Creates a professor", method = "POST")
     @PostMapping
     public ResponseEntity<ProfessorResponseDTO> createProfessor(@Valid @RequestBody ProfessorRequestDTO professorCreateDTO) {
         return ResponseEntity.status(HttpStatus.CREATED).body(service.createProfessor(professorCreateDTO));

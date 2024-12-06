@@ -40,13 +40,13 @@ public class Department {
     private String code;
 
     @Column(nullable = false)
-    private String title;
+    private String name;
 
     @OneToMany(mappedBy = "department", fetch = FetchType.LAZY)
     private Set<PublicServant> publicServants = new HashSet<>();
 
-    public Department(String code, String title) {
+    public Department(String code, String name) {
         this.code = code;
-        this.title = title;
+        this.name = name;
     }
 }
