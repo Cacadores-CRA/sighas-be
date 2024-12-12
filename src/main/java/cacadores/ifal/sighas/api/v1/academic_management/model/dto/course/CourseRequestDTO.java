@@ -8,12 +8,12 @@ public record CourseRequestDTO(
     @NotBlank(message = "Invalid course code")
     String code,
 
-    @NotBlank(message = "Invalid course name")
+    @NotBlank(message = "Invalid course title")
     String title,
 
-    @NotBlank(message = "Invalid course code")
+    @NotBlank(message = "Invalid course shortName")
     String shortName,
 
-    @NotBlank(message = "Invalid course name")
+    // @NotBlank(message = "Invalid course quantityOfSemester")
     Integer quantityOfSemesters
 ) {}
