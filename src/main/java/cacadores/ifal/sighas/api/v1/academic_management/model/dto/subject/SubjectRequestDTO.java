@@ -1,6 +1,7 @@
 package cacadores.ifal.sighas.api.v1.academic_management.model.dto.subject;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+
 import jakarta.validation.constraints.NotBlank;
 
 @Schema(description = "DTO for creating and updating subjects")

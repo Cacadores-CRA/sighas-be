@@ -4,11 +4,10 @@ import cacadores.ifal.sighas.api.v1.academic_management.exception.course.CourseU
 import cacadores.ifal.sighas.api.v1.academic_management.model.dto.course.CourseRequestDTO;
 import cacadores.ifal.sighas.api.v1.academic_management.model.dto.course.CourseResponseDTO;
 import cacadores.ifal.sighas.api.v1.academic_management.model.entity.Course;
-import cacadores.ifal.sighas.api.v1.academic_management.model.entity.UserRole;
 import cacadores.ifal.sighas.api.v1.academic_management.repository.CourseRepository;
-import cacadores.ifal.sighas.api.v1.academic_management.repository.UserRoleRepository;
+
 import jakarta.transaction.Transactional;
-import org.springframework.security.crypto.password.PasswordEncoder;
+
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,10 +18,7 @@ import java.util.stream.Collectors;
 //TODO: Add @Transactional annotation on methods
 public class CourseService {
     private final CourseRepository repository;
-    //  private final UserRoleRepository userRoleRepository;
-    // private final PasswordEncoder passwordEncoder;
-    public CourseService(CourseRepository courseRepository
-    ) {
+    public CourseService(CourseRepository courseRepository) {
         this.repository = courseRepository;
     }
 
@@ -95,7 +91,6 @@ public class CourseService {
             courseRequestDTO.title(),
             courseRequestDTO.shortName(),
             courseRequestDTO.quantityOfSemesters()
-            // userRequestDTO.roles().stream().map(UserRole::new).collect(Collectors.toSet())
         );
     }
 }

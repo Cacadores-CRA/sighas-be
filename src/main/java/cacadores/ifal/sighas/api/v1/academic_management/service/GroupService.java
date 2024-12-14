@@ -1,12 +1,13 @@
 package cacadores.ifal.sighas.api.v1.academic_management.service;
 
-import cacadores.ifal.sighas.api.v1.academic_management.exception.course.CourseUUIDNotFoundException;
 import cacadores.ifal.sighas.api.v1.academic_management.exception.group.GroupUUIDNotFoundException;
 import cacadores.ifal.sighas.api.v1.academic_management.model.dto.group.GroupRequestDTO;
 import cacadores.ifal.sighas.api.v1.academic_management.model.dto.group.GroupResponseDTO;
 import cacadores.ifal.sighas.api.v1.academic_management.model.entity.Group;
 import cacadores.ifal.sighas.api.v1.academic_management.repository.GroupRepository;
+
 import jakarta.transaction.Transactional;
+
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,10 +18,7 @@ import java.util.stream.Collectors;
 //TODO: Add @Transactional annotation on methods
 public class GroupService {
     private final GroupRepository repository;
-    //  private final UserRoleRepository userRoleRepository;
-    // private final PasswordEncoder passwordEncoder;
-    public GroupService(GroupRepository groupRepository
-    ) {
+    public GroupService(GroupRepository groupRepository) {
         this.repository = groupRepository;
     }
 
