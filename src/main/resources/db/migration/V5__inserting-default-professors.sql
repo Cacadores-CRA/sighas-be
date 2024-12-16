@@ -2,11 +2,11 @@
 
 /* CREATING PROFESSOR AFFILIATIONS */
 
-INSERT INTO tab_affiliation (id, user_id, status, starting_date)
-values('b81c0ddd-c504-471f-b796-65c1463dca7f','19a14dd6-52d0-42f8-b27b-a813bb0a3124', 'ACTIVE', '01-01-2000');
+INSERT INTO tab_affiliation (id, user_id, status, starting_date, created_at)
+values('b81c0ddd-c504-471f-b796-65c1463dca7f','19a14dd6-52d0-42f8-b27b-a813bb0a3124', 'ACTIVE', '01-01-2000', '2024-12-10 10:00:00.000000000');
 
-INSERT INTO tab_affiliation (id, user_id, status, starting_date)
-values('40785ccb-91d0-48ea-963b-15dce5c11d77', '7087dc13-753a-4c62-b86b-06d0730e745d', 'ACTIVE', '01-01-2000');
+INSERT INTO tab_affiliation (id, user_id, status, starting_date, created_at)
+values('40785ccb-91d0-48ea-963b-15dce5c11d77', '7087dc13-753a-4c62-b86b-06d0730e745d', 'ACTIVE', '01-01-2000', '2024-12-11 10:00:00.000000000');
 
 /* CREATING PUBLIC SERVANT AFFILIATIONS */
 

@@ -46,7 +46,10 @@ public class Group {
 
     @OneToMany(mappedBy = "group")
     private Set<AcademicLessonReservation> schedules;
+
     private GroupStatus status;
+
+    //TODO: add academicPeriod attribute
 
     public Group(String code, Subject subject, GroupStatus status) {
         this.code = code;

@@ -15,6 +15,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Set;
 
 @NoArgsConstructor
@@ -45,6 +46,7 @@ public class Professor extends PublicServant {
         this.setStartingDate(startingDate);
         this.setEndingDate(endingDate);
         this.setStatus(status);
+        this.setCreatedAt(LocalDateTime.now());
 
         this.setSiape(siape);
         this.setEducation(education);

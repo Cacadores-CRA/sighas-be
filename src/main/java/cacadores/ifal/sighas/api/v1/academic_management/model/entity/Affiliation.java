@@ -20,6 +20,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @NoArgsConstructor
@@ -46,4 +47,6 @@ public abstract class Affiliation {
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private AffiliationStatus status;
+
+    private LocalDateTime createdAt;
 }

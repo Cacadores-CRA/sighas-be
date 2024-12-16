@@ -13,6 +13,7 @@ import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 import lombok.Getter;
@@ -25,6 +26,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -86,6 +88,9 @@ public class User implements UserDetails {
     @Size(message = "Password cannot exceed 100 characters", max = 100)
     private String password;
 
+    @NotNull
+    private LocalDateTime createdAt;
+
     @ManyToMany
     @JoinTable(
         name = "tab_user_has_role",
@@ -123,6 +128,7 @@ public class User implements UserDetails {
         this.email = email;
         this.username = username;
         this.password = password;
+        this.createdAt = LocalDateTime.now();
         this.setRoles(roles);
     }
 }

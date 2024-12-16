@@ -5,6 +5,7 @@ import cacadores.ifal.sighas.api.v1.academic_management.model.enums.AppRole;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Set;
 import java.util.UUID;
 
@@ -17,5 +18,6 @@ public record UserResponseDTO(
         //TODO: Convert date format
         LocalDate birthdate,
         String email,
-        Set<AppRole> roles
+        Set<AppRole> roles,
+        LocalDateTime createdAt
 ) {}

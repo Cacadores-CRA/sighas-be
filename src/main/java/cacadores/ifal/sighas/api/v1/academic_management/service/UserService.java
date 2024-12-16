@@ -105,7 +105,8 @@ public class UserService {
             user.getSurname(),
             user.getBirthdate(),
             user.getEmail(),
-            user.getRoles().stream().map(UserRole::getRole).collect(Collectors.toSet())
+            user.getRoles().stream().map(UserRole::getRole).collect(Collectors.toSet()),
+            user.getCreatedAt()
         );
     }
 

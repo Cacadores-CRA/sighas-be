@@ -91,7 +91,8 @@ public class StudentService {
             student.getUser().getName(),
             student.getStatus(),
             student.getEnrollment(),
-            student.getInstitutionalEmail()
+            student.getInstitutionalEmail(),
+            student.getCreatedAt()
         );
     }
 

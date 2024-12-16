@@ -103,7 +103,8 @@ public class ProfessorService {
             professor.getUser().getName(),
             professor.getStatus(),
             professor.getEducation(),
-            professor.getInstitutionalEmail()
+            professor.getInstitutionalEmail(),
+            professor.getCreatedAt()
         );
     }
 
