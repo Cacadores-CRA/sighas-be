@@ -97,7 +97,7 @@ public class ProfessorService {
     }
 
     //ENTITY TO RESPONSE DTO
-    private ProfessorResponseDTO toProfessorResponseDTO(Professor professor) {
+    protected ProfessorResponseDTO toProfessorResponseDTO(Professor professor) {
         return new ProfessorResponseDTO(
             professor.getSiape(),
             professor.getUser().getName(),

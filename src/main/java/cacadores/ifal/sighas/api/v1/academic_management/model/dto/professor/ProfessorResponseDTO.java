@@ -1,5 +1,6 @@
 package cacadores.ifal.sighas.api.v1.academic_management.model.dto.professor;
 
+import cacadores.ifal.sighas.api.v1.academic_management.interfaces.ConcreteAffiliationResponseDTO;
 import cacadores.ifal.sighas.api.v1.academic_management.model.enums.AffiliationStatus;
 import cacadores.ifal.sighas.api.v1.academic_management.model.enums.EducationLevel;
 
@@ -15,4 +16,4 @@ public record ProfessorResponseDTO(
     EducationLevel education,
     String institutionalEmail,
     LocalDateTime createdAt
-) {}
+) implements ConcreteAffiliationResponseDTO {}

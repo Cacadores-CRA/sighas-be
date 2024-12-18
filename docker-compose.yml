@@ -1,4 +1,13 @@
 services:
+#  sighas-be-app:
+#    build: .
+#    ports:
+#      - "8080:8080"
+#    depends_on:
+#      - database
+#    networks:
+#      - sighas-be-network
+
   database:
     image: postgres:latest
     container_name: sighas-database
@@ -9,6 +18,9 @@ services:
       - POSTGRES_PASSWORD=admin
     ports:
       - "5432:5432"
+    networks:
+      - sighas-be-network
+
   pgadmin:
     image: dpage/pgadmin4:latest
     container_name: pgadmin
@@ -20,3 +32,7 @@ services:
       - "8081:80"
     volumes:
       - ./pgadmin_data:/var/lib/pgadmin
+
+networks:
+  sighas-be-network:
+    driver: bridge

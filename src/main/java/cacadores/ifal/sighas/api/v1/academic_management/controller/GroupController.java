@@ -34,7 +34,7 @@ public class GroupController {
     }
 
     //CREATE
-    @Operation(summary = "Creates a course", method = "POST")
+    @Operation(summary = "Creates a group", method = "POST")
     @PostMapping
     public ResponseEntity<GroupResponseDTO> createCourse(@Valid @RequestBody GroupRequestDTO groupCreateDTO) {
         return ResponseEntity.status(HttpStatus.CREATED).body(service.createGroup(groupCreateDTO));

@@ -3,9 +3,9 @@
 --
 
 -- Dumped from database version 17.2 (Debian 17.2-1.pgdg120+1)
--- Dumped by pg_dump version 17.0
+-- Dumped by pg_dump version 17.2
 
--- Started on 2024-12-16 13:40:00 UTC
+-- Started on 2024-12-18 12:47:27 UTC
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -30,7 +30,7 @@ SET row_security = off;
 ALTER SCHEMA public OWNER TO pg_database_owner;
 
 --
--- TOC entry 3621 (class 0 OID 0)
+-- TOC entry 3622 (class 0 OID 0)
 -- Dependencies: 4
 -- Name: SCHEMA public; Type: COMMENT; Schema: -; Owner: pg_database_owner
 --
@@ -61,7 +61,7 @@ ALTER TABLE public.group_id OWNER TO admin;
 --
 
 CREATE TABLE public.tab_administrative_public_servant (
-                                                          id uuid NOT NULL
+                                                          affiliation_id uuid NOT NULL
 );
 
 
@@ -155,14 +155,16 @@ CREATE TABLE public.tab_course (
                                    id uuid NOT NULL,
                                    code character varying(255),
                                    short_title character varying(255),
-                                   title character varying(255)
+                                   title character varying(255),
+                                   type character varying(255),
+                                   CONSTRAINT tab_course_type_check CHECK (((type)::text = ANY ((ARRAY['BACHELOR'::character varying, 'LICENTIATE'::character varying, 'SUBSEQUENT'::character varying, 'INTEGRATED'::character varying, 'MASTER'::character varying, 'DOCTORATE'::character varying, 'POSTGRADUATE'::character varying, 'EXTENSION'::character varying, 'SPECIALIZATION'::character varying, 'TECHNICAL'::character varying])::text[])))
 );
 
 
 ALTER TABLE public.tab_course OWNER TO admin;
 
 --
--- TOC entry 225 (class 1259 OID 16427)
+-- TOC entry 225 (class 1259 OID 16428)
 -- Name: tab_course_calendar; Type: TABLE; Schema: public; Owner: admin
 --
 
@@ -175,7 +177,7 @@ CREATE TABLE public.tab_course_calendar (
 ALTER TABLE public.tab_course_calendar OWNER TO admin;
 
 --
--- TOC entry 226 (class 1259 OID 16432)
+-- TOC entry 226 (class 1259 OID 16433)
 -- Name: tab_course_has_subject; Type: TABLE; Schema: public; Owner: admin
 --
 
@@ -188,7 +190,7 @@ CREATE TABLE public.tab_course_has_subject (
 ALTER TABLE public.tab_course_has_subject OWNER TO admin;
 
 --
--- TOC entry 227 (class 1259 OID 16437)
+-- TOC entry 227 (class 1259 OID 16438)
 -- Name: tab_department; Type: TABLE; Schema: public; Owner: admin
 --
 
@@ -202,7 +204,7 @@ CREATE TABLE public.tab_department (
 ALTER TABLE public.tab_department OWNER TO admin;
 
 --
--- TOC entry 228 (class 1259 OID 16446)
+-- TOC entry 228 (class 1259 OID 16447)
 -- Name: tab_group; Type: TABLE; Schema: public; Owner: admin
 --
 
@@ -218,33 +220,33 @@ CREATE TABLE public.tab_group (
 ALTER TABLE public.tab_group OWNER TO admin;
 
 --
--- TOC entry 229 (class 1259 OID 16452)
+-- TOC entry 229 (class 1259 OID 16453)
 -- Name: tab_group_has_professor; Type: TABLE; Schema: public; Owner: admin
 --
 
 CREATE TABLE public.tab_group_has_professor (
                                                 group_id uuid NOT NULL,
-                                                professors_id uuid NOT NULL
+                                                professors_affiliation_id uuid NOT NULL
 );
 
 
 ALTER TABLE public.tab_group_has_professor OWNER TO admin;
 
 --
--- TOC entry 230 (class 1259 OID 16457)
+-- TOC entry 230 (class 1259 OID 16458)
 -- Name: tab_group_has_student; Type: TABLE; Schema: public; Owner: admin
 --
 
 CREATE TABLE public.tab_group_has_student (
                                               group_id uuid NOT NULL,
-                                              students_id uuid NOT NULL
+                                              students_affiliation_id uuid NOT NULL
 );
 
 
 ALTER TABLE public.tab_group_has_student OWNER TO admin;
 
 --
--- TOC entry 231 (class 1259 OID 16462)
+-- TOC entry 231 (class 1259 OID 16463)
 -- Name: tab_internal_room; Type: TABLE; Schema: public; Owner: admin
 --
 
@@ -258,7 +260,7 @@ CREATE TABLE public.tab_internal_room (
 ALTER TABLE public.tab_internal_room OWNER TO admin;
 
 --
--- TOC entry 232 (class 1259 OID 16467)
+-- TOC entry 232 (class 1259 OID 16468)
 -- Name: tab_lesson_reservation; Type: TABLE; Schema: public; Owner: admin
 --
 
@@ -275,12 +277,12 @@ CREATE TABLE public.tab_lesson_reservation (
 ALTER TABLE public.tab_lesson_reservation OWNER TO admin;
 
 --
--- TOC entry 233 (class 1259 OID 16473)
+-- TOC entry 233 (class 1259 OID 16474)
 -- Name: tab_professor; Type: TABLE; Schema: public; Owner: admin
 --
 
 CREATE TABLE public.tab_professor (
-                                      id uuid NOT NULL,
+                                      affiliation_id uuid NOT NULL,
                                       institutional_email character varying(255) NOT NULL
 );
 
@@ -288,7 +290,7 @@ CREATE TABLE public.tab_professor (
 ALTER TABLE public.tab_professor OWNER TO admin;
 
 --
--- TOC entry 234 (class 1259 OID 16480)
+-- TOC entry 234 (class 1259 OID 16481)
 -- Name: tab_professor_calendar; Type: TABLE; Schema: public; Owner: admin
 --
 
@@ -301,26 +303,26 @@ CREATE TABLE public.tab_professor_calendar (
 ALTER TABLE public.tab_professor_calendar OWNER TO admin;
 
 --
--- TOC entry 235 (class 1259 OID 16485)
+-- TOC entry 235 (class 1259 OID 16486)
 -- Name: tab_professor_groups; Type: TABLE; Schema: public; Owner: admin
 --
 
 CREATE TABLE public.tab_professor_groups (
                                              groups_id uuid NOT NULL,
-                                             professor_id uuid NOT NULL
+                                             professor_affiliation_id uuid NOT NULL
 );
 
 
 ALTER TABLE public.tab_professor_groups OWNER TO admin;
 
 --
--- TOC entry 236 (class 1259 OID 16490)
+-- TOC entry 236 (class 1259 OID 16491)
 -- Name: tab_public_servant; Type: TABLE; Schema: public; Owner: admin
 --
 
 CREATE TABLE public.tab_public_servant (
+                                           affiliation_id uuid NOT NULL,
                                            department_id uuid,
-                                           id uuid NOT NULL,
                                            education_level character varying(255) NOT NULL,
                                            siape character varying(255) NOT NULL,
                                            CONSTRAINT tab_public_servant_education_level_check CHECK (((education_level)::text = ANY ((ARRAY['HIGH_SCHOOL'::character varying, 'TECHNICAL_CERTIFICATION'::character varying, 'ASSOCIATE'::character varying, 'BACHELOR_EDUCATION'::character varying, 'BACHELOR'::character varying, 'POSTGRADUATE'::character varying, 'MASTER'::character varying, 'DOCTORATE'::character varying, 'POST_DOCTORATE'::character varying])::text[])))
@@ -330,7 +332,7 @@ CREATE TABLE public.tab_public_servant (
 ALTER TABLE public.tab_public_servant OWNER TO admin;
 
 --
--- TOC entry 237 (class 1259 OID 16500)
+-- TOC entry 237 (class 1259 OID 16501)
 -- Name: tab_public_servant_has_role; Type: TABLE; Schema: public; Owner: admin
 --
 
@@ -343,7 +345,7 @@ CREATE TABLE public.tab_public_servant_has_role (
 ALTER TABLE public.tab_public_servant_has_role OWNER TO admin;
 
 --
--- TOC entry 239 (class 1259 OID 16506)
+-- TOC entry 239 (class 1259 OID 16507)
 -- Name: tab_public_servant_role; Type: TABLE; Schema: public; Owner: admin
 --
 
@@ -357,7 +359,7 @@ CREATE TABLE public.tab_public_servant_role (
 ALTER TABLE public.tab_public_servant_role OWNER TO admin;
 
 --
--- TOC entry 238 (class 1259 OID 16505)
+-- TOC entry 238 (class 1259 OID 16506)
 -- Name: tab_public_servant_role_id_seq; Type: SEQUENCE; Schema: public; Owner: admin
 --
 
@@ -372,13 +374,13 @@ ALTER TABLE public.tab_public_servant_role ALTER COLUMN id ADD GENERATED BY DEFA
 
 
 --
--- TOC entry 240 (class 1259 OID 16514)
+-- TOC entry 240 (class 1259 OID 16515)
 -- Name: tab_student; Type: TABLE; Schema: public; Owner: admin
 --
 
 CREATE TABLE public.tab_student (
+                                    affiliation_id uuid NOT NULL,
                                     course_id uuid,
-                                    id uuid NOT NULL,
                                     enrollment character varying(255) NOT NULL,
                                     institutional_email character varying(255) NOT NULL
 );
@@ -387,7 +389,7 @@ CREATE TABLE public.tab_student (
 ALTER TABLE public.tab_student OWNER TO admin;
 
 --
--- TOC entry 241 (class 1259 OID 16525)
+-- TOC entry 241 (class 1259 OID 16526)
 -- Name: tab_student_calendar; Type: TABLE; Schema: public; Owner: admin
 --
 
@@ -400,20 +402,20 @@ CREATE TABLE public.tab_student_calendar (
 ALTER TABLE public.tab_student_calendar OWNER TO admin;
 
 --
--- TOC entry 242 (class 1259 OID 16530)
+-- TOC entry 242 (class 1259 OID 16531)
 -- Name: tab_student_groups; Type: TABLE; Schema: public; Owner: admin
 --
 
 CREATE TABLE public.tab_student_groups (
                                            groups_id uuid NOT NULL,
-                                           student_id uuid NOT NULL
+                                           student_affiliation_id uuid NOT NULL
 );
 
 
 ALTER TABLE public.tab_student_groups OWNER TO admin;
 
 --
--- TOC entry 243 (class 1259 OID 16535)
+-- TOC entry 243 (class 1259 OID 16536)
 -- Name: tab_subject; Type: TABLE; Schema: public; Owner: admin
 --
 
@@ -428,7 +430,7 @@ CREATE TABLE public.tab_subject (
 ALTER TABLE public.tab_subject OWNER TO admin;
 
 --
--- TOC entry 244 (class 1259 OID 16542)
+-- TOC entry 244 (class 1259 OID 16543)
 -- Name: tab_subject_courses; Type: TABLE; Schema: public; Owner: admin
 --
 
@@ -441,7 +443,7 @@ CREATE TABLE public.tab_subject_courses (
 ALTER TABLE public.tab_subject_courses OWNER TO admin;
 
 --
--- TOC entry 245 (class 1259 OID 16547)
+-- TOC entry 245 (class 1259 OID 16548)
 -- Name: tab_user; Type: TABLE; Schema: public; Owner: admin
 --
 
@@ -461,7 +463,7 @@ CREATE TABLE public.tab_user (
 ALTER TABLE public.tab_user OWNER TO admin;
 
 --
--- TOC entry 246 (class 1259 OID 16560)
+-- TOC entry 246 (class 1259 OID 16561)
 -- Name: tab_user_has_role; Type: TABLE; Schema: public; Owner: admin
 --
 
@@ -474,7 +476,7 @@ CREATE TABLE public.tab_user_has_role (
 ALTER TABLE public.tab_user_has_role OWNER TO admin;
 
 --
--- TOC entry 247 (class 1259 OID 16565)
+-- TOC entry 247 (class 1259 OID 16566)
 -- Name: tab_user_role; Type: TABLE; Schema: public; Owner: admin
 --
 
@@ -488,7 +490,7 @@ CREATE TABLE public.tab_user_role (
 ALTER TABLE public.tab_user_role OWNER TO admin;
 
 --
--- TOC entry 3585 (class 0 OID 16385)
+-- TOC entry 3586 (class 0 OID 16385)
 -- Dependencies: 217
 -- Data for Name: group_id; Type: TABLE DATA; Schema: public; Owner: admin
 --
@@ -498,17 +500,17 @@ COPY public.group_id (group_id, id) FROM stdin;
 
 
 --
--- TOC entry 3586 (class 0 OID 16390)
+-- TOC entry 3587 (class 0 OID 16390)
 -- Dependencies: 218
 -- Data for Name: tab_administrative_public_servant; Type: TABLE DATA; Schema: public; Owner: admin
 --
 
-COPY public.tab_administrative_public_servant (id) FROM stdin;
+COPY public.tab_administrative_public_servant (affiliation_id) FROM stdin;
 \.
 
 
 --
--- TOC entry 3587 (class 0 OID 16395)
+-- TOC entry 3588 (class 0 OID 16395)
 -- Dependencies: 219
 -- Data for Name: tab_affiliation; Type: TABLE DATA; Schema: public; Owner: admin
 --
@@ -518,7 +520,7 @@ COPY public.tab_affiliation (ending_date, starting_date, created_at, id, user_id
 
 
 --
--- TOC entry 3589 (class 0 OID 16402)
+-- TOC entry 3590 (class 0 OID 16402)
 -- Dependencies: 221
 -- Data for Name: tab_building; Type: TABLE DATA; Schema: public; Owner: admin
 --
@@ -528,7 +530,7 @@ COPY public.tab_building (type, id, code) FROM stdin;
 
 
 --
--- TOC entry 3590 (class 0 OID 16408)
+-- TOC entry 3591 (class 0 OID 16408)
 -- Dependencies: 222
 -- Data for Name: tab_classroom; Type: TABLE DATA; Schema: public; Owner: admin
 --
@@ -538,7 +540,7 @@ COPY public.tab_classroom (status, id, code) FROM stdin;
 
 
 --
--- TOC entry 3591 (class 0 OID 16414)
+-- TOC entry 3592 (class 0 OID 16414)
 -- Dependencies: 223
 -- Data for Name: tab_computer_laboratory; Type: TABLE DATA; Schema: public; Owner: admin
 --
@@ -548,17 +550,17 @@ COPY public.tab_computer_laboratory (status, id, code) FROM stdin;
 
 
 --
--- TOC entry 3592 (class 0 OID 16420)
+-- TOC entry 3593 (class 0 OID 16420)
 -- Dependencies: 224
 -- Data for Name: tab_course; Type: TABLE DATA; Schema: public; Owner: admin
 --
 
-COPY public.tab_course (quantity_of_semesters, id, code, short_title, title) FROM stdin;
+COPY public.tab_course (quantity_of_semesters, id, code, short_title, title, type) FROM stdin;
 \.
 
 
 --
--- TOC entry 3593 (class 0 OID 16427)
+-- TOC entry 3594 (class 0 OID 16428)
 -- Dependencies: 225
 -- Data for Name: tab_course_calendar; Type: TABLE DATA; Schema: public; Owner: admin
 --
@@ -568,7 +570,7 @@ COPY public.tab_course_calendar (id, title) FROM stdin;
 
 
 --
--- TOC entry 3594 (class 0 OID 16432)
+-- TOC entry 3595 (class 0 OID 16433)
 -- Dependencies: 226
 -- Data for Name: tab_course_has_subject; Type: TABLE DATA; Schema: public; Owner: admin
 --
@@ -578,7 +580,7 @@ COPY public.tab_course_has_subject (course_id, subjects_id) FROM stdin;
 
 
 --
--- TOC entry 3595 (class 0 OID 16437)
+-- TOC entry 3596 (class 0 OID 16438)
 -- Dependencies: 227
 -- Data for Name: tab_department; Type: TABLE DATA; Schema: public; Owner: admin
 --
@@ -588,7 +590,7 @@ COPY public.tab_department (id, code, name) FROM stdin;
 
 
 --
--- TOC entry 3596 (class 0 OID 16446)
+-- TOC entry 3597 (class 0 OID 16447)
 -- Dependencies: 228
 -- Data for Name: tab_group; Type: TABLE DATA; Schema: public; Owner: admin
 --
@@ -598,27 +600,27 @@ COPY public.tab_group (status, id, subject_id, code) FROM stdin;
 
 
 --
--- TOC entry 3597 (class 0 OID 16452)
+-- TOC entry 3598 (class 0 OID 16453)
 -- Dependencies: 229
 -- Data for Name: tab_group_has_professor; Type: TABLE DATA; Schema: public; Owner: admin
 --
 
-COPY public.tab_group_has_professor (group_id, professors_id) FROM stdin;
+COPY public.tab_group_has_professor (group_id, professors_affiliation_id) FROM stdin;
 \.
 
 
 --
--- TOC entry 3598 (class 0 OID 16457)
+-- TOC entry 3599 (class 0 OID 16458)
 -- Dependencies: 230
 -- Data for Name: tab_group_has_student; Type: TABLE DATA; Schema: public; Owner: admin
 --
 
-COPY public.tab_group_has_student (group_id, students_id) FROM stdin;
+COPY public.tab_group_has_student (group_id, students_affiliation_id) FROM stdin;
 \.
 
 
 --
--- TOC entry 3599 (class 0 OID 16462)
+-- TOC entry 3600 (class 0 OID 16463)
 -- Dependencies: 231
 -- Data for Name: tab_internal_room; Type: TABLE DATA; Schema: public; Owner: admin
 --
@@ -628,7 +630,7 @@ COPY public.tab_internal_room (building_id, id, observations) FROM stdin;
 
 
 --
--- TOC entry 3600 (class 0 OID 16467)
+-- TOC entry 3601 (class 0 OID 16468)
 -- Dependencies: 232
 -- Data for Name: tab_lesson_reservation; Type: TABLE DATA; Schema: public; Owner: admin
 --
@@ -638,17 +640,17 @@ COPY public.tab_lesson_reservation (day, ending_time, starting_time, classroom_i
 
 
 --
--- TOC entry 3601 (class 0 OID 16473)
+-- TOC entry 3602 (class 0 OID 16474)
 -- Dependencies: 233
 -- Data for Name: tab_professor; Type: TABLE DATA; Schema: public; Owner: admin
 --
 
-COPY public.tab_professor (id, institutional_email) FROM stdin;
+COPY public.tab_professor (affiliation_id, institutional_email) FROM stdin;
 \.
 
 
 --
--- TOC entry 3602 (class 0 OID 16480)
+-- TOC entry 3603 (class 0 OID 16481)
 -- Dependencies: 234
 -- Data for Name: tab_professor_calendar; Type: TABLE DATA; Schema: public; Owner: admin
 --
@@ -658,27 +660,27 @@ COPY public.tab_professor_calendar (id, title) FROM stdin;
 
 
 --
--- TOC entry 3603 (class 0 OID 16485)
+-- TOC entry 3604 (class 0 OID 16486)
 -- Dependencies: 235
 -- Data for Name: tab_professor_groups; Type: TABLE DATA; Schema: public; Owner: admin
 --
 
-COPY public.tab_professor_groups (groups_id, professor_id) FROM stdin;
+COPY public.tab_professor_groups (groups_id, professor_affiliation_id) FROM stdin;
 \.
 
 
 --
--- TOC entry 3604 (class 0 OID 16490)
+-- TOC entry 3605 (class 0 OID 16491)
 -- Dependencies: 236
 -- Data for Name: tab_public_servant; Type: TABLE DATA; Schema: public; Owner: admin
 --
 
-COPY public.tab_public_servant (department_id, id, education_level, siape) FROM stdin;
+COPY public.tab_public_servant (affiliation_id, department_id, education_level, siape) FROM stdin;
 \.
 
 
 --
--- TOC entry 3605 (class 0 OID 16500)
+-- TOC entry 3606 (class 0 OID 16501)
 -- Dependencies: 237
 -- Data for Name: tab_public_servant_has_role; Type: TABLE DATA; Schema: public; Owner: admin
 --
@@ -688,7 +690,7 @@ COPY public.tab_public_servant_has_role (public_servant_role_id, public_servant_
 
 
 --
--- TOC entry 3607 (class 0 OID 16506)
+-- TOC entry 3608 (class 0 OID 16507)
 -- Dependencies: 239
 -- Data for Name: tab_public_servant_role; Type: TABLE DATA; Schema: public; Owner: admin
 --
@@ -698,17 +700,17 @@ COPY public.tab_public_servant_role (id, role) FROM stdin;
 
 
 --
--- TOC entry 3608 (class 0 OID 16514)
+-- TOC entry 3609 (class 0 OID 16515)
 -- Dependencies: 240
 -- Data for Name: tab_student; Type: TABLE DATA; Schema: public; Owner: admin
 --
 
-COPY public.tab_student (course_id, id, enrollment, institutional_email) FROM stdin;
+COPY public.tab_student (affiliation_id, course_id, enrollment, institutional_email) FROM stdin;
 \.
 
 
 --
--- TOC entry 3609 (class 0 OID 16525)
+-- TOC entry 3610 (class 0 OID 16526)
 -- Dependencies: 241
 -- Data for Name: tab_student_calendar; Type: TABLE DATA; Schema: public; Owner: admin
 --
@@ -718,17 +720,17 @@ COPY public.tab_student_calendar (id, title) FROM stdin;
 
 
 --
--- TOC entry 3610 (class 0 OID 16530)
+-- TOC entry 3611 (class 0 OID 16531)
 -- Dependencies: 242
 -- Data for Name: tab_student_groups; Type: TABLE DATA; Schema: public; Owner: admin
 --
 
-COPY public.tab_student_groups (groups_id, student_id) FROM stdin;
+COPY public.tab_student_groups (groups_id, student_affiliation_id) FROM stdin;
 \.
 
 
 --
--- TOC entry 3611 (class 0 OID 16535)
+-- TOC entry 3612 (class 0 OID 16536)
 -- Dependencies: 243
 -- Data for Name: tab_subject; Type: TABLE DATA; Schema: public; Owner: admin
 --
@@ -738,7 +740,7 @@ COPY public.tab_subject (id, code, short_tile, title) FROM stdin;
 
 
 --
--- TOC entry 3612 (class 0 OID 16542)
+-- TOC entry 3613 (class 0 OID 16543)
 -- Dependencies: 244
 -- Data for Name: tab_subject_courses; Type: TABLE DATA; Schema: public; Owner: admin
 --
@@ -748,7 +750,7 @@ COPY public.tab_subject_courses (courses_id, subject_id) FROM stdin;
 
 
 --
--- TOC entry 3613 (class 0 OID 16547)
+-- TOC entry 3614 (class 0 OID 16548)
 -- Dependencies: 245
 -- Data for Name: tab_user; Type: TABLE DATA; Schema: public; Owner: admin
 --
@@ -758,7 +760,7 @@ COPY public.tab_user (birthdate, created_at, id, password, cpf, email, name, sur
 
 
 --
--- TOC entry 3614 (class 0 OID 16560)
+-- TOC entry 3615 (class 0 OID 16561)
 -- Dependencies: 246
 -- Data for Name: tab_user_has_role; Type: TABLE DATA; Schema: public; Owner: admin
 --
@@ -768,7 +770,7 @@ COPY public.tab_user_has_role (user_role_id, user_id) FROM stdin;
 
 
 --
--- TOC entry 3615 (class 0 OID 16565)
+-- TOC entry 3616 (class 0 OID 16566)
 -- Dependencies: 247
 -- Data for Name: tab_user_role; Type: TABLE DATA; Schema: public; Owner: admin
 --
@@ -778,7 +780,7 @@ COPY public.tab_user_role (id, role) FROM stdin;
 
 
 --
--- TOC entry 3622 (class 0 OID 0)
+-- TOC entry 3623 (class 0 OID 0)
 -- Dependencies: 220
 -- Name: tab_building_id_seq; Type: SEQUENCE SET; Schema: public; Owner: admin
 --
@@ -787,7 +789,7 @@ SELECT pg_catalog.setval('public.tab_building_id_seq', 1, false);
 
 
 --
--- TOC entry 3623 (class 0 OID 0)
+-- TOC entry 3624 (class 0 OID 0)
 -- Dependencies: 238
 -- Name: tab_public_servant_role_id_seq; Type: SEQUENCE SET; Schema: public; Owner: admin
 --
@@ -796,7 +798,7 @@ SELECT pg_catalog.setval('public.tab_public_servant_role_id_seq', 1, false);
 
 
 --
--- TOC entry 3333 (class 2606 OID 16389)
+-- TOC entry 3334 (class 2606 OID 16389)
 -- Name: group_id group_id_pkey; Type: CONSTRAINT; Schema: public; Owner: admin
 --
 
@@ -805,16 +807,16 @@ ALTER TABLE ONLY public.group_id
 
 
 --
--- TOC entry 3335 (class 2606 OID 16394)
+-- TOC entry 3336 (class 2606 OID 16394)
 -- Name: tab_administrative_public_servant tab_administrative_public_servant_pkey; Type: CONSTRAINT; Schema: public; Owner: admin
 --
 
 ALTER TABLE ONLY public.tab_administrative_public_servant
-    ADD CONSTRAINT tab_administrative_public_servant_pkey PRIMARY KEY (id);
+    ADD CONSTRAINT tab_administrative_public_servant_pkey PRIMARY KEY (affiliation_id);
 
 
 --
--- TOC entry 3337 (class 2606 OID 16400)
+-- TOC entry 3338 (class 2606 OID 16400)
 -- Name: tab_affiliation tab_affiliation_pkey; Type: CONSTRAINT; Schema: public; Owner: admin
 --
 
@@ -823,7 +825,7 @@ ALTER TABLE ONLY public.tab_affiliation
 
 
 --
--- TOC entry 3339 (class 2606 OID 16407)
+-- TOC entry 3340 (class 2606 OID 16407)
 -- Name: tab_building tab_building_pkey; Type: CONSTRAINT; Schema: public; Owner: admin
 --
 
@@ -832,7 +834,7 @@ ALTER TABLE ONLY public.tab_building
 
 
 --
--- TOC entry 3341 (class 2606 OID 16413)
+-- TOC entry 3342 (class 2606 OID 16413)
 -- Name: tab_classroom tab_classroom_pkey; Type: CONSTRAINT; Schema: public; Owner: admin
 --
 
@@ -841,7 +843,7 @@ ALTER TABLE ONLY public.tab_classroom
 
 
 --
--- TOC entry 3343 (class 2606 OID 16419)
+-- TOC entry 3344 (class 2606 OID 16419)
 -- Name: tab_computer_laboratory tab_computer_laboratory_pkey; Type: CONSTRAINT; Schema: public; Owner: admin
 --
 
@@ -850,7 +852,7 @@ ALTER TABLE ONLY public.tab_computer_laboratory
 
 
 --
--- TOC entry 3347 (class 2606 OID 16431)
+-- TOC entry 3348 (class 2606 OID 16432)
 -- Name: tab_course_calendar tab_course_calendar_pkey; Type: CONSTRAINT; Schema: public; Owner: admin
 --
 
@@ -859,7 +861,7 @@ ALTER TABLE ONLY public.tab_course_calendar
 
 
 --
--- TOC entry 3349 (class 2606 OID 16436)
+-- TOC entry 3350 (class 2606 OID 16437)
 -- Name: tab_course_has_subject tab_course_has_subject_pkey; Type: CONSTRAINT; Schema: public; Owner: admin
 --
 
@@ -868,7 +870,7 @@ ALTER TABLE ONLY public.tab_course_has_subject
 
 
 --
--- TOC entry 3345 (class 2606 OID 16426)
+-- TOC entry 3346 (class 2606 OID 16427)
 -- Name: tab_course tab_course_pkey; Type: CONSTRAINT; Schema: public; Owner: admin
 --
 
@@ -877,7 +879,7 @@ ALTER TABLE ONLY public.tab_course
 
 
 --
--- TOC entry 3351 (class 2606 OID 16443)
+-- TOC entry 3352 (class 2606 OID 16444)
 -- Name: tab_department tab_department_pkey; Type: CONSTRAINT; Schema: public; Owner: admin
 --
 
@@ -886,25 +888,25 @@ ALTER TABLE ONLY public.tab_department
 
 
 --
--- TOC entry 3357 (class 2606 OID 16456)
+-- TOC entry 3358 (class 2606 OID 16457)
 -- Name: tab_group_has_professor tab_group_has_professor_pkey; Type: CONSTRAINT; Schema: public; Owner: admin
 --
 
 ALTER TABLE ONLY public.tab_group_has_professor
-    ADD CONSTRAINT tab_group_has_professor_pkey PRIMARY KEY (group_id, professors_id);
+    ADD CONSTRAINT tab_group_has_professor_pkey PRIMARY KEY (group_id, professors_affiliation_id);
 
 
 --
--- TOC entry 3359 (class 2606 OID 16461)
+-- TOC entry 3360 (class 2606 OID 16462)
 -- Name: tab_group_has_student tab_group_has_student_pkey; Type: CONSTRAINT; Schema: public; Owner: admin
 --
 
 ALTER TABLE ONLY public.tab_group_has_student
-    ADD CONSTRAINT tab_group_has_student_pkey PRIMARY KEY (group_id, students_id);
+    ADD CONSTRAINT tab_group_has_student_pkey PRIMARY KEY (group_id, students_affiliation_id);
 
 
 --
--- TOC entry 3355 (class 2606 OID 16451)
+-- TOC entry 3356 (class 2606 OID 16452)
 -- Name: tab_group tab_group_pkey; Type: CONSTRAINT; Schema: public; Owner: admin
 --
 
@@ -913,7 +915,7 @@ ALTER TABLE ONLY public.tab_group
 
 
 --
--- TOC entry 3361 (class 2606 OID 16466)
+-- TOC entry 3362 (class 2606 OID 16467)
 -- Name: tab_internal_room tab_internal_room_pkey; Type: CONSTRAINT; Schema: public; Owner: admin
 --
 
@@ -922,7 +924,7 @@ ALTER TABLE ONLY public.tab_internal_room
 
 
 --
--- TOC entry 3363 (class 2606 OID 16472)
+-- TOC entry 3364 (class 2606 OID 16473)
 -- Name: tab_lesson_reservation tab_lesson_reservation_pkey; Type: CONSTRAINT; Schema: public; Owner: admin
 --
 
@@ -931,7 +933,7 @@ ALTER TABLE ONLY public.tab_lesson_reservation
 
 
 --
--- TOC entry 3369 (class 2606 OID 16484)
+-- TOC entry 3370 (class 2606 OID 16485)
 -- Name: tab_professor_calendar tab_professor_calendar_pkey; Type: CONSTRAINT; Schema: public; Owner: admin
 --
 
@@ -940,25 +942,25 @@ ALTER TABLE ONLY public.tab_professor_calendar
 
 
 --
--- TOC entry 3371 (class 2606 OID 16489)
+-- TOC entry 3372 (class 2606 OID 16490)
 -- Name: tab_professor_groups tab_professor_groups_pkey; Type: CONSTRAINT; Schema: public; Owner: admin
 --
 
 ALTER TABLE ONLY public.tab_professor_groups
-    ADD CONSTRAINT tab_professor_groups_pkey PRIMARY KEY (groups_id, professor_id);
+    ADD CONSTRAINT tab_professor_groups_pkey PRIMARY KEY (groups_id, professor_affiliation_id);
 
 
 --
--- TOC entry 3365 (class 2606 OID 16477)
+-- TOC entry 3366 (class 2606 OID 16478)
 -- Name: tab_professor tab_professor_pkey; Type: CONSTRAINT; Schema: public; Owner: admin
 --
 
 ALTER TABLE ONLY public.tab_professor
-    ADD CONSTRAINT tab_professor_pkey PRIMARY KEY (id);
+    ADD CONSTRAINT tab_professor_pkey PRIMARY KEY (affiliation_id);
 
 
 --
--- TOC entry 3377 (class 2606 OID 16504)
+-- TOC entry 3378 (class 2606 OID 16505)
 -- Name: tab_public_servant_has_role tab_public_servant_has_role_pkey; Type: CONSTRAINT; Schema: public; Owner: admin
 --
 
@@ -967,16 +969,16 @@ ALTER TABLE ONLY public.tab_public_servant_has_role
 
 
 --
--- TOC entry 3373 (class 2606 OID 16497)
+-- TOC entry 3374 (class 2606 OID 16498)
 -- Name: tab_public_servant tab_public_servant_pkey; Type: CONSTRAINT; Schema: public; Owner: admin
 --
 
 ALTER TABLE ONLY public.tab_public_servant
-    ADD CONSTRAINT tab_public_servant_pkey PRIMARY KEY (id);
+    ADD CONSTRAINT tab_public_servant_pkey PRIMARY KEY (affiliation_id);
 
 
 --
--- TOC entry 3379 (class 2606 OID 16511)
+-- TOC entry 3380 (class 2606 OID 16512)
 -- Name: tab_public_servant_role tab_public_servant_role_pkey; Type: CONSTRAINT; Schema: public; Owner: admin
 --
 
@@ -985,7 +987,7 @@ ALTER TABLE ONLY public.tab_public_servant_role
 
 
 --
--- TOC entry 3389 (class 2606 OID 16529)
+-- TOC entry 3390 (class 2606 OID 16530)
 -- Name: tab_student_calendar tab_student_calendar_pkey; Type: CONSTRAINT; Schema: public; Owner: admin
 --
 
@@ -994,25 +996,25 @@ ALTER TABLE ONLY public.tab_student_calendar
 
 
 --
--- TOC entry 3391 (class 2606 OID 16534)
+-- TOC entry 3392 (class 2606 OID 16535)
 -- Name: tab_student_groups tab_student_groups_pkey; Type: CONSTRAINT; Schema: public; Owner: admin
 --
 
 ALTER TABLE ONLY public.tab_student_groups
-    ADD CONSTRAINT tab_student_groups_pkey PRIMARY KEY (groups_id, student_id);
+    ADD CONSTRAINT tab_student_groups_pkey PRIMARY KEY (groups_id, student_affiliation_id);
 
 
 --
--- TOC entry 3383 (class 2606 OID 16520)
+-- TOC entry 3384 (class 2606 OID 16521)
 -- Name: tab_student tab_student_pkey; Type: CONSTRAINT; Schema: public; Owner: admin
 --
 
 ALTER TABLE ONLY public.tab_student
-    ADD CONSTRAINT tab_student_pkey PRIMARY KEY (id);
+    ADD CONSTRAINT tab_student_pkey PRIMARY KEY (affiliation_id);
 
 
 --
--- TOC entry 3395 (class 2606 OID 16546)
+-- TOC entry 3396 (class 2606 OID 16547)
 -- Name: tab_subject_courses tab_subject_courses_pkey; Type: CONSTRAINT; Schema: public; Owner: admin
 --
 
@@ -1021,7 +1023,7 @@ ALTER TABLE ONLY public.tab_subject_courses
 
 
 --
--- TOC entry 3393 (class 2606 OID 16541)
+-- TOC entry 3394 (class 2606 OID 16542)
 -- Name: tab_subject tab_subject_pkey; Type: CONSTRAINT; Schema: public; Owner: admin
 --
 
@@ -1030,7 +1032,7 @@ ALTER TABLE ONLY public.tab_subject
 
 
 --
--- TOC entry 3405 (class 2606 OID 16564)
+-- TOC entry 3406 (class 2606 OID 16565)
 -- Name: tab_user_has_role tab_user_has_role_pkey; Type: CONSTRAINT; Schema: public; Owner: admin
 --
 
@@ -1039,7 +1041,7 @@ ALTER TABLE ONLY public.tab_user_has_role
 
 
 --
--- TOC entry 3397 (class 2606 OID 16553)
+-- TOC entry 3398 (class 2606 OID 16554)
 -- Name: tab_user tab_user_pkey; Type: CONSTRAINT; Schema: public; Owner: admin
 --
 
@@ -1048,7 +1050,7 @@ ALTER TABLE ONLY public.tab_user
 
 
 --
--- TOC entry 3407 (class 2606 OID 16570)
+-- TOC entry 3408 (class 2606 OID 16571)
 -- Name: tab_user_role tab_user_role_pkey; Type: CONSTRAINT; Schema: public; Owner: admin
 --
 
@@ -1057,7 +1059,7 @@ ALTER TABLE ONLY public.tab_user_role
 
 
 --
--- TOC entry 3353 (class 2606 OID 16445)
+-- TOC entry 3354 (class 2606 OID 16446)
 -- Name: tab_department un_code_tab_department; Type: CONSTRAINT; Schema: public; Owner: admin
 --
 
@@ -1066,7 +1068,7 @@ ALTER TABLE ONLY public.tab_department
 
 
 --
--- TOC entry 3399 (class 2606 OID 16555)
+-- TOC entry 3400 (class 2606 OID 16556)
 -- Name: tab_user un_cpf_tab_user; Type: CONSTRAINT; Schema: public; Owner: admin
 --
 
@@ -1075,7 +1077,7 @@ ALTER TABLE ONLY public.tab_user
 
 
 --
--- TOC entry 3401 (class 2606 OID 16557)
+-- TOC entry 3402 (class 2606 OID 16558)
 -- Name: tab_user un_email_tab_user; Type: CONSTRAINT; Schema: public; Owner: admin
 --
 
@@ -1084,7 +1086,7 @@ ALTER TABLE ONLY public.tab_user
 
 
 --
--- TOC entry 3385 (class 2606 OID 16522)
+-- TOC entry 3386 (class 2606 OID 16523)
 -- Name: tab_student un_enrollment_tab_student; Type: CONSTRAINT; Schema: public; Owner: admin
 --
 
@@ -1093,7 +1095,7 @@ ALTER TABLE ONLY public.tab_student
 
 
 --
--- TOC entry 3367 (class 2606 OID 16479)
+-- TOC entry 3368 (class 2606 OID 16480)
 -- Name: tab_professor un_institutional_email_tab_professor; Type: CONSTRAINT; Schema: public; Owner: admin
 --
 
@@ -1102,7 +1104,7 @@ ALTER TABLE ONLY public.tab_professor
 
 
 --
--- TOC entry 3387 (class 2606 OID 16524)
+-- TOC entry 3388 (class 2606 OID 16525)
 -- Name: tab_student un_institutional_email_tab_student; Type: CONSTRAINT; Schema: public; Owner: admin
 --
 
@@ -1111,7 +1113,7 @@ ALTER TABLE ONLY public.tab_student
 
 
 --
--- TOC entry 3381 (class 2606 OID 16513)
+-- TOC entry 3382 (class 2606 OID 16514)
 -- Name: tab_public_servant_role un_role_tab_public_servant_role; Type: CONSTRAINT; Schema: public; Owner: admin
 --
 
@@ -1120,7 +1122,7 @@ ALTER TABLE ONLY public.tab_public_servant_role
 
 
 --
--- TOC entry 3409 (class 2606 OID 16572)
+-- TOC entry 3410 (class 2606 OID 16573)
 -- Name: tab_user_role un_role_tab_user_role; Type: CONSTRAINT; Schema: public; Owner: admin
 --
 
@@ -1129,7 +1131,7 @@ ALTER TABLE ONLY public.tab_user_role
 
 
 --
--- TOC entry 3375 (class 2606 OID 16499)
+-- TOC entry 3376 (class 2606 OID 16500)
 -- Name: tab_public_servant un_siape_tab_public_servant; Type: CONSTRAINT; Schema: public; Owner: admin
 --
 
@@ -1138,7 +1140,7 @@ ALTER TABLE ONLY public.tab_public_servant
 
 
 --
--- TOC entry 3403 (class 2606 OID 16559)
+-- TOC entry 3404 (class 2606 OID 16560)
 -- Name: tab_user un_username_tab_user; Type: CONSTRAINT; Schema: public; Owner: admin
 --
 
@@ -1147,25 +1149,7 @@ ALTER TABLE ONLY public.tab_user
 
 
 --
--- TOC entry 3425 (class 2606 OID 16648)
--- Name: tab_professor fk18m0jps0jn9vd0r5hi27m5jbf; Type: FK CONSTRAINT; Schema: public; Owner: admin
---
-
-ALTER TABLE ONLY public.tab_professor
-    ADD CONSTRAINT fk18m0jps0jn9vd0r5hi27m5jbf FOREIGN KEY (id) REFERENCES public.tab_public_servant(id);
-
-
---
--- TOC entry 3412 (class 2606 OID 16583)
--- Name: tab_administrative_public_servant fk1jryfbax0cbastspphp2s1yli; Type: FK CONSTRAINT; Schema: public; Owner: admin
---
-
-ALTER TABLE ONLY public.tab_administrative_public_servant
-    ADD CONSTRAINT fk1jryfbax0cbastspphp2s1yli FOREIGN KEY (id) REFERENCES public.tab_public_servant(id);
-
-
---
--- TOC entry 3430 (class 2606 OID 16673)
+-- TOC entry 3431 (class 2606 OID 16674)
 -- Name: tab_public_servant_has_role fk28kunwve6203qyvtdvnu03fyh; Type: FK CONSTRAINT; Schema: public; Owner: admin
 --
 
@@ -1174,7 +1158,7 @@ ALTER TABLE ONLY public.tab_public_servant_has_role
 
 
 --
--- TOC entry 3438 (class 2606 OID 16713)
+-- TOC entry 3439 (class 2606 OID 16714)
 -- Name: tab_user_has_role fk2rh2wh387ytycggdep21jm56w; Type: FK CONSTRAINT; Schema: public; Owner: admin
 --
 
@@ -1183,16 +1167,7 @@ ALTER TABLE ONLY public.tab_user_has_role
 
 
 --
--- TOC entry 3428 (class 2606 OID 16668)
--- Name: tab_public_servant fk2wa60h58oms8crh3o31ufm21w; Type: FK CONSTRAINT; Schema: public; Owner: admin
---
-
-ALTER TABLE ONLY public.tab_public_servant
-    ADD CONSTRAINT fk2wa60h58oms8crh3o31ufm21w FOREIGN KEY (id) REFERENCES public.tab_affiliation(id);
-
-
---
--- TOC entry 3434 (class 2606 OID 16693)
+-- TOC entry 3435 (class 2606 OID 16694)
 -- Name: tab_student_groups fk381mmqimieo8pchr7j7woa27j; Type: FK CONSTRAINT; Schema: public; Owner: admin
 --
 
@@ -1201,7 +1176,16 @@ ALTER TABLE ONLY public.tab_student_groups
 
 
 --
--- TOC entry 3436 (class 2606 OID 16708)
+-- TOC entry 3436 (class 2606 OID 16699)
+-- Name: tab_student_groups fk3ojyqfxct6om9meksvi09q0q3; Type: FK CONSTRAINT; Schema: public; Owner: admin
+--
+
+ALTER TABLE ONLY public.tab_student_groups
+    ADD CONSTRAINT fk3ojyqfxct6om9meksvi09q0q3 FOREIGN KEY (student_affiliation_id) REFERENCES public.tab_student(affiliation_id);
+
+
+--
+-- TOC entry 3437 (class 2606 OID 16709)
 -- Name: tab_subject_courses fk4voxttsubnvxsanrloncfdte4; Type: FK CONSTRAINT; Schema: public; Owner: admin
 --
 
@@ -1210,7 +1194,7 @@ ALTER TABLE ONLY public.tab_subject_courses
 
 
 --
--- TOC entry 3410 (class 2606 OID 16578)
+-- TOC entry 3411 (class 2606 OID 16579)
 -- Name: group_id fk5t8gir3pyqenis1y0fd5jf40u; Type: FK CONSTRAINT; Schema: public; Owner: admin
 --
 
@@ -1219,7 +1203,7 @@ ALTER TABLE ONLY public.group_id
 
 
 --
--- TOC entry 3426 (class 2606 OID 16653)
+-- TOC entry 3427 (class 2606 OID 16654)
 -- Name: tab_professor_groups fk60byudwyqjojjbpfrq0gxt7lh; Type: FK CONSTRAINT; Schema: public; Owner: admin
 --
 
@@ -1228,34 +1212,16 @@ ALTER TABLE ONLY public.tab_professor_groups
 
 
 --
--- TOC entry 3432 (class 2606 OID 16688)
--- Name: tab_student fk6gmffoak7cnus601930h4w35i; Type: FK CONSTRAINT; Schema: public; Owner: admin
---
-
-ALTER TABLE ONLY public.tab_student
-    ADD CONSTRAINT fk6gmffoak7cnus601930h4w35i FOREIGN KEY (id) REFERENCES public.tab_affiliation(id);
-
-
---
--- TOC entry 3421 (class 2606 OID 16628)
--- Name: tab_group_has_student fk6vr44uocv30otsyoys48i1uwr; Type: FK CONSTRAINT; Schema: public; Owner: admin
---
-
-ALTER TABLE ONLY public.tab_group_has_student
-    ADD CONSTRAINT fk6vr44uocv30otsyoys48i1uwr FOREIGN KEY (students_id) REFERENCES public.tab_student(id);
-
-
---
--- TOC entry 3427 (class 2606 OID 16658)
--- Name: tab_professor_groups fk7848splvy1qa3esdjfusmjciu; Type: FK CONSTRAINT; Schema: public; Owner: admin
+-- TOC entry 3428 (class 2606 OID 16659)
+-- Name: tab_professor_groups fk63puxy3mbtqx6f5o580awqpal; Type: FK CONSTRAINT; Schema: public; Owner: admin
 --
 
 ALTER TABLE ONLY public.tab_professor_groups
-    ADD CONSTRAINT fk7848splvy1qa3esdjfusmjciu FOREIGN KEY (professor_id) REFERENCES public.tab_professor(id);
+    ADD CONSTRAINT fk63puxy3mbtqx6f5o580awqpal FOREIGN KEY (professor_affiliation_id) REFERENCES public.tab_professor(affiliation_id);
 
 
 --
--- TOC entry 3414 (class 2606 OID 16593)
+-- TOC entry 3415 (class 2606 OID 16594)
 -- Name: tab_classroom fk8aafk0xmbyu17bgg5x0h609o; Type: FK CONSTRAINT; Schema: public; Owner: admin
 --
 
@@ -1264,7 +1230,16 @@ ALTER TABLE ONLY public.tab_classroom
 
 
 --
--- TOC entry 3411 (class 2606 OID 16573)
+-- TOC entry 3426 (class 2606 OID 16649)
+-- Name: tab_professor fk9jynjy6klyoaka3llgvwulsgm; Type: FK CONSTRAINT; Schema: public; Owner: admin
+--
+
+ALTER TABLE ONLY public.tab_professor
+    ADD CONSTRAINT fk9jynjy6klyoaka3llgvwulsgm FOREIGN KEY (affiliation_id) REFERENCES public.tab_public_servant(affiliation_id);
+
+
+--
+-- TOC entry 3412 (class 2606 OID 16574)
 -- Name: group_id fkc0ohkp7obd10nxmv6e5p2vrvc; Type: FK CONSTRAINT; Schema: public; Owner: admin
 --
 
@@ -1273,7 +1248,7 @@ ALTER TABLE ONLY public.group_id
 
 
 --
--- TOC entry 3418 (class 2606 OID 16613)
+-- TOC entry 3419 (class 2606 OID 16614)
 -- Name: tab_group fkdqp8ngpf9qd3js484ihqroonu; Type: FK CONSTRAINT; Schema: public; Owner: admin
 --
 
@@ -1282,7 +1257,7 @@ ALTER TABLE ONLY public.tab_group
 
 
 --
--- TOC entry 3437 (class 2606 OID 16703)
+-- TOC entry 3438 (class 2606 OID 16704)
 -- Name: tab_subject_courses fke9291aaoguocsmhtb7tx0y1v0; Type: FK CONSTRAINT; Schema: public; Owner: admin
 --
 
@@ -1291,16 +1266,7 @@ ALTER TABLE ONLY public.tab_subject_courses
 
 
 --
--- TOC entry 3419 (class 2606 OID 16618)
--- Name: tab_group_has_professor fked93l5srvpvt2opyqkujyamwu; Type: FK CONSTRAINT; Schema: public; Owner: admin
---
-
-ALTER TABLE ONLY public.tab_group_has_professor
-    ADD CONSTRAINT fked93l5srvpvt2opyqkujyamwu FOREIGN KEY (professors_id) REFERENCES public.tab_professor(id);
-
-
---
--- TOC entry 3423 (class 2606 OID 16638)
+-- TOC entry 3424 (class 2606 OID 16639)
 -- Name: tab_internal_room fkehpfkbxkw0lbrk6rv4ax40nn; Type: FK CONSTRAINT; Schema: public; Owner: admin
 --
 
@@ -1309,7 +1275,7 @@ ALTER TABLE ONLY public.tab_internal_room
 
 
 --
--- TOC entry 3424 (class 2606 OID 16643)
+-- TOC entry 3425 (class 2606 OID 16644)
 -- Name: tab_lesson_reservation fkei635p6q95hm1siedyg08t6ui; Type: FK CONSTRAINT; Schema: public; Owner: admin
 --
 
@@ -1318,7 +1284,7 @@ ALTER TABLE ONLY public.tab_lesson_reservation
 
 
 --
--- TOC entry 3413 (class 2606 OID 16588)
+-- TOC entry 3414 (class 2606 OID 16589)
 -- Name: tab_affiliation fkgu6awqwjmr1itpkb4p73q4li3; Type: FK CONSTRAINT; Schema: public; Owner: admin
 --
 
@@ -1327,7 +1293,7 @@ ALTER TABLE ONLY public.tab_affiliation
 
 
 --
--- TOC entry 3420 (class 2606 OID 16623)
+-- TOC entry 3420 (class 2606 OID 16624)
 -- Name: tab_group_has_professor fkhfce4yubpknsdt3gw2dkw3671; Type: FK CONSTRAINT; Schema: public; Owner: admin
 --
 
@@ -1336,7 +1302,25 @@ ALTER TABLE ONLY public.tab_group_has_professor
 
 
 --
--- TOC entry 3415 (class 2606 OID 16598)
+-- TOC entry 3421 (class 2606 OID 16619)
+-- Name: tab_group_has_professor fkibavjfsqktjdds3lngegneajh; Type: FK CONSTRAINT; Schema: public; Owner: admin
+--
+
+ALTER TABLE ONLY public.tab_group_has_professor
+    ADD CONSTRAINT fkibavjfsqktjdds3lngegneajh FOREIGN KEY (professors_affiliation_id) REFERENCES public.tab_professor(affiliation_id);
+
+
+--
+-- TOC entry 3422 (class 2606 OID 16629)
+-- Name: tab_group_has_student fkjbkfa6067c9355f7x62ddx6jl; Type: FK CONSTRAINT; Schema: public; Owner: admin
+--
+
+ALTER TABLE ONLY public.tab_group_has_student
+    ADD CONSTRAINT fkjbkfa6067c9355f7x62ddx6jl FOREIGN KEY (students_affiliation_id) REFERENCES public.tab_student(affiliation_id);
+
+
+--
+-- TOC entry 3416 (class 2606 OID 16599)
 -- Name: tab_computer_laboratory fkk20ewkmjhbvc1t2jul612i20n; Type: FK CONSTRAINT; Schema: public; Owner: admin
 --
 
@@ -1345,7 +1329,7 @@ ALTER TABLE ONLY public.tab_computer_laboratory
 
 
 --
--- TOC entry 3416 (class 2606 OID 16603)
+-- TOC entry 3417 (class 2606 OID 16604)
 -- Name: tab_course_has_subject fkknr885u448h7goh7ho96qd24; Type: FK CONSTRAINT; Schema: public; Owner: admin
 --
 
@@ -1354,16 +1338,25 @@ ALTER TABLE ONLY public.tab_course_has_subject
 
 
 --
--- TOC entry 3431 (class 2606 OID 16678)
+-- TOC entry 3433 (class 2606 OID 16689)
+-- Name: tab_student fkkyvbtqfdu35t4paok1wpmh6xe; Type: FK CONSTRAINT; Schema: public; Owner: admin
+--
+
+ALTER TABLE ONLY public.tab_student
+    ADD CONSTRAINT fkkyvbtqfdu35t4paok1wpmh6xe FOREIGN KEY (affiliation_id) REFERENCES public.tab_affiliation(id);
+
+
+--
+-- TOC entry 3432 (class 2606 OID 16679)
 -- Name: tab_public_servant_has_role fkl226xgouagx2so99rg6cyxjpr; Type: FK CONSTRAINT; Schema: public; Owner: admin
 --
 
 ALTER TABLE ONLY public.tab_public_servant_has_role
-    ADD CONSTRAINT fkl226xgouagx2so99rg6cyxjpr FOREIGN KEY (public_servant_id) REFERENCES public.tab_public_servant(id);
+    ADD CONSTRAINT fkl226xgouagx2so99rg6cyxjpr FOREIGN KEY (public_servant_id) REFERENCES public.tab_public_servant(affiliation_id);
 
 
 --
--- TOC entry 3417 (class 2606 OID 16608)
+-- TOC entry 3418 (class 2606 OID 16609)
 -- Name: tab_course_has_subject fkm39u6ad9raw3qojaskwv64xx7; Type: FK CONSTRAINT; Schema: public; Owner: admin
 --
 
@@ -1372,16 +1365,7 @@ ALTER TABLE ONLY public.tab_course_has_subject
 
 
 --
--- TOC entry 3435 (class 2606 OID 16698)
--- Name: tab_student_groups fknejmpk5li8yo1kfn8n7u4slh5; Type: FK CONSTRAINT; Schema: public; Owner: admin
---
-
-ALTER TABLE ONLY public.tab_student_groups
-    ADD CONSTRAINT fknejmpk5li8yo1kfn8n7u4slh5 FOREIGN KEY (student_id) REFERENCES public.tab_student(id);
-
-
---
--- TOC entry 3429 (class 2606 OID 16663)
+-- TOC entry 3429 (class 2606 OID 16664)
 -- Name: tab_public_servant fknsnrjg8yy349vyho77gkdjydb; Type: FK CONSTRAINT; Schema: public; Owner: admin
 --
 
@@ -1390,7 +1374,7 @@ ALTER TABLE ONLY public.tab_public_servant
 
 
 --
--- TOC entry 3433 (class 2606 OID 16683)
+-- TOC entry 3434 (class 2606 OID 16684)
 -- Name: tab_student fkofyng9cuud38t4bewdlhqoc37; Type: FK CONSTRAINT; Schema: public; Owner: admin
 --
 
@@ -1399,7 +1383,25 @@ ALTER TABLE ONLY public.tab_student
 
 
 --
--- TOC entry 3422 (class 2606 OID 16633)
+-- TOC entry 3413 (class 2606 OID 16584)
+-- Name: tab_administrative_public_servant fkr1rjjsu6olnv3x8epbkjaptd3; Type: FK CONSTRAINT; Schema: public; Owner: admin
+--
+
+ALTER TABLE ONLY public.tab_administrative_public_servant
+    ADD CONSTRAINT fkr1rjjsu6olnv3x8epbkjaptd3 FOREIGN KEY (affiliation_id) REFERENCES public.tab_public_servant(affiliation_id);
+
+
+--
+-- TOC entry 3430 (class 2606 OID 16669)
+-- Name: tab_public_servant fks9lkowcy31hr5qr32h3n6dgus; Type: FK CONSTRAINT; Schema: public; Owner: admin
+--
+
+ALTER TABLE ONLY public.tab_public_servant
+    ADD CONSTRAINT fks9lkowcy31hr5qr32h3n6dgus FOREIGN KEY (affiliation_id) REFERENCES public.tab_affiliation(id);
+
+
+--
+-- TOC entry 3423 (class 2606 OID 16634)
 -- Name: tab_group_has_student fksk2391mq2qu89jewybwcktda6; Type: FK CONSTRAINT; Schema: public; Owner: admin
 --
 
@@ -1408,7 +1410,7 @@ ALTER TABLE ONLY public.tab_group_has_student
 
 
 --
--- TOC entry 3439 (class 2606 OID 16718)
+-- TOC entry 3440 (class 2606 OID 16719)
 -- Name: tab_user_has_role fkssrounfohxjwa2mcsko8r339n; Type: FK CONSTRAINT; Schema: public; Owner: admin
 --
 
@@ -1416,7 +1418,7 @@ ALTER TABLE ONLY public.tab_user_has_role
     ADD CONSTRAINT fkssrounfohxjwa2mcsko8r339n FOREIGN KEY (user_id) REFERENCES public.tab_user(id);
 
 
--- Completed on 2024-12-16 13:40:00 UTC
+-- Completed on 2024-12-18 12:47:27 UTC
 
 --
 -- PostgreSQL database dump complete

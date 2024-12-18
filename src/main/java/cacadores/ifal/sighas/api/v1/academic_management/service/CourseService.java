@@ -58,7 +58,7 @@ public class CourseService {
         
         savedCourse.setCode(courseUpdateDTO.code());
         savedCourse.setTitle(courseUpdateDTO.title());
-        savedCourse.setShortTitle(courseUpdateDTO.shortName());
+        savedCourse.setShortTitle(courseUpdateDTO.shortTitle());
         savedCourse.setQuantityOfSemesters(courseUpdateDTO.quantityOfSemesters());
 
         return this.toCourseResponseDTO(repository.save(savedCourse));
@@ -81,6 +81,7 @@ public class CourseService {
             course.getCode(),
             course.getTitle(),
             course.getShortTitle(),
+            course.getType(),
             course.getQuantityOfSemesters()
         );
     }
@@ -89,7 +90,8 @@ public class CourseService {
         return new Course(
             courseRequestDTO.code(),
             courseRequestDTO.title(),
-            courseRequestDTO.shortName(),
+            courseRequestDTO.shortTitle(),
+            courseRequestDTO.type(),
             courseRequestDTO.quantityOfSemesters()
         );
     }

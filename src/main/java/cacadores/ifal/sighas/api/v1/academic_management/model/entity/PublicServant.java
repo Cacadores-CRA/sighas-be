@@ -12,6 +12,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.PrimaryKeyJoinColumn;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
 import jakarta.validation.constraints.Pattern;
@@ -35,6 +36,7 @@ import java.util.Set;
     )
 )
 @Inheritance(strategy = InheritanceType.JOINED)
+@PrimaryKeyJoinColumn(name = "affiliation_id")
 public abstract class PublicServant extends Affiliation {
 
     @Pattern(message = "SIAPE code must contain exactly 7 numeric digits", regexp = "^\\d{7}$")

@@ -9,8 +9,8 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>cacadores.ifal</groupId>
-	<artifactId>sighas</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<artifactId>sighas-be</artifactId>
+	<version>1.0.0v</version>
 	<name>sighas</name>
 	<description>Sistema Integrado de Gestão de Horários e Alocação de Salas (SIGHAS)</description>
 	<url/>

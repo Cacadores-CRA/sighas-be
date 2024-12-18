@@ -1,9 +1,14 @@
 package cacadores.ifal.sighas.api.v1.academic_management.model.dto.course;
 
+import cacadores.ifal.sighas.api.v1.academic_management.model.enums.CourseType;
+
 import io.swagger.v3.oas.annotations.media.Schema;
 
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 @Schema(description = "DTO for creating and updating courses")
 public record CourseRequestDTO(
@@ -14,7 +19,11 @@ public record CourseRequestDTO(
     String title,
 
     @NotBlank(message = "Invalid course shortName")
-    String shortName,
+    String shortTitle,
+
+    @Enumerated(EnumType.STRING)
+    @NotNull(message = "Invalid course type")
+    CourseType type,
 
     @Min(value = 1, message = "A course must have at least one semester")
     Integer quantityOfSemesters
