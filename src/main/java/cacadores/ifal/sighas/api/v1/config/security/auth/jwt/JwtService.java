@@ -1,5 +1,7 @@
 package cacadores.ifal.sighas.api.v1.config.security.auth.jwt;
 
+import cacadores.ifal.sighas.api.v1.academic_management.model.entity.User;
+
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.oauth2.jwt.JwtClaimsSet;
@@ -27,7 +29,7 @@ public class JwtService {
             .collect(Collectors.toList());
 
         JwtClaimsSet claims = JwtClaimsSet.builder()
-            .issuer("sighas-backend")
+            .issuer("SIGHAS Backend")
             .issuedAt(now)
             .expiresAt(now.plusSeconds(expirySeconds))
             .subject(authentication.getName())
@@ -35,8 +37,12 @@ public class JwtService {
             .build();
 
         String jsonWebToken = jwtEncoder.encode(JwtEncoderParameters.from(claims)).getTokenValue();
+        User authenticatedUser = (User) authentication.getPrincipal();
 
         return new JwtDTO(
+            authenticatedUser.getName(),
+            authenticatedUser.getSurname(),
+            authenticatedUser.getEmail(),
             jsonWebToken,
             "Bearer Token",
             now.plusSeconds(expirySeconds)

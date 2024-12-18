@@ -5,6 +5,7 @@ import cacadores.ifal.sighas.api.v1.academic_management.model.dto.student.Studen
 import cacadores.ifal.sighas.api.v1.academic_management.service.StudentService;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 import jakarta.validation.Valid;
@@ -26,6 +27,7 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/v1/students")
 @Tag(name = "Students Management", description = "Endpoints for managing students")
+@SecurityRequirement(name = "jwtAuthentication")
 //TODO: Complete documentation
 public class StudentController {
     private final StudentService service;

@@ -45,13 +45,14 @@ public class SecurityConfiguration {
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
+            .authorizeHttpRequests(authorizeRequests -> authorizeRequests
+                .requestMatchers("/swagger-ui/**", "/v3/api-docs*/**", "/v1/auth").permitAll()
+                .anyRequest().authenticated()
+            )
             .cors(Customizer.withDefaults())
             .csrf(AbstractHttpConfigurer::disable)
             .sessionManagement(session -> session
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-            )
-            .authorizeHttpRequests(authorizeRequests -> authorizeRequests
-                .anyRequest().permitAll()
             )
             .oauth2ResourceServer(configurer -> configurer
                 .jwt(Customizer.withDefaults())

@@ -5,6 +5,7 @@ import cacadores.ifal.sighas.api.v1.academic_management.model.dto.course.CourseR
 import cacadores.ifal.sighas.api.v1.academic_management.service.CourseService;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 import jakarta.validation.Valid;
@@ -26,6 +27,7 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/v1/courses")
 @Tag(name = "Courses", description = "Endpoints for courses management")
+@SecurityRequirement(name = "jwtAuthentication")
 //TODO: Complete documentation
 public class CourseController {
     private final CourseService service;

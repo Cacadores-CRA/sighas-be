@@ -11,7 +11,7 @@
 	<groupId>cacadores.ifal</groupId>
 	<artifactId>sighas-be</artifactId>
 	<version>1.0.0v</version>
-	<name>sighas</name>
+	<name>SIGHAS Backend</name>
 	<description>Sistema Integrado de Gestão de Horários e Alocação de Salas (SIGHAS)</description>
 	<url/>
 	<licenses>

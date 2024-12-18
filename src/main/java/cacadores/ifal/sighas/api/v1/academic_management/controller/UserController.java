@@ -5,6 +5,7 @@ import cacadores.ifal.sighas.api.v1.academic_management.model.dto.user.UserRespo
 import cacadores.ifal.sighas.api.v1.academic_management.service.UserService;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 import jakarta.validation.Valid;
@@ -26,6 +27,7 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/v1/users")
 @Tag(name = "Users Management", description = "Endpoints for managing users")
+@SecurityRequirement(name = "jwtAuthentication")
 //TODO: Complete documentation
 public class UserController {
     private final UserService service;

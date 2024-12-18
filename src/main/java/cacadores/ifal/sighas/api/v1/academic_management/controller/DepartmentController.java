@@ -5,6 +5,7 @@ import cacadores.ifal.sighas.api.v1.academic_management.model.dto.department.Dep
 import cacadores.ifal.sighas.api.v1.academic_management.service.DepartmentService;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 import jakarta.validation.Valid;
@@ -26,6 +27,7 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/v1/departments")
 @Tag(name = "Departments", description = "Endpoints for departments management")
+@SecurityRequirement(name = "jwtAuthentication")
 //TODO: Complete documentation
 public class DepartmentController {
     private final DepartmentService service;

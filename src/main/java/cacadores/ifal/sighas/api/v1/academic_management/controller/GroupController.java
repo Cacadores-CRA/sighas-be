@@ -5,6 +5,7 @@ import cacadores.ifal.sighas.api.v1.academic_management.model.dto.group.GroupRes
 import cacadores.ifal.sighas.api.v1.academic_management.service.GroupService;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 import jakarta.validation.Valid;
@@ -26,6 +27,7 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/v1/groups")
 @Tag(name = "Groups", description = "Endpoints for groups management")
+@SecurityRequirement(name = "jwtAuthentication")
 //TODO: Complete documentation
 public class GroupController {
     private final GroupService service;
