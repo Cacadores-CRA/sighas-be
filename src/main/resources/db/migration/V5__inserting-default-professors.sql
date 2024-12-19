@@ -12,14 +12,14 @@ values('40785ccb-91d0-48ea-963b-15dce5c11d77', '7087dc13-753a-4c62-b86b-06d0730e
 
 INSERT INTO tab_public_servant (affiliation_id, siape, education_level, department_id)
 values('b81c0ddd-c504-471f-b796-65c1463dca7f',
-       '3333333333',
+       '3333333',
        'DOCTORATE',
        '16fb6a0c-74c1-4654-be21-aa3bc226e89b'
 );
 
 INSERT INTO tab_public_servant (affiliation_id, siape, education_level, department_id)
 values('40785ccb-91d0-48ea-963b-15dce5c11d77',
-       '4444444444',
+       '4444444',
        'DOCTORATE',
        '16fb6a0c-74c1-4654-be21-aa3bc226e89b'
 );
