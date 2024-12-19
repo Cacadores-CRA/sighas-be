@@ -57,7 +57,7 @@ public class UserController {
     }
 
     //UPDATE
-    @Operation(summary = "Updates a user", method = "UPDATE")
+    @Operation(summary = "Updates a user", method = "PUT")
     @PutMapping("/{id}")
     public ResponseEntity<UserResponseDTO> updateUser(@PathVariable UUID id, @Valid @RequestBody UserRequestDTO userUpdateDTO) {
         return ResponseEntity.status(HttpStatus.OK).body(service.updateUser(id, userUpdateDTO));

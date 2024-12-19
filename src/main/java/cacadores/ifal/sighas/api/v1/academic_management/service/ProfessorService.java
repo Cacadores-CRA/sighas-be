@@ -1,6 +1,7 @@
 package cacadores.ifal.sighas.api.v1.academic_management.service;
 
 import cacadores.ifal.sighas.api.v1.academic_management.exception.affiliation.AffiliationUUIDNotFoundException;
+import cacadores.ifal.sighas.api.v1.academic_management.exception.department.DepartmentUUIDNotFoundException;
 import cacadores.ifal.sighas.api.v1.academic_management.exception.user.UserUUIDNotFoundException;
 import cacadores.ifal.sighas.api.v1.academic_management.model.dto.professor.ProfessorRequestDTO;
 import cacadores.ifal.sighas.api.v1.academic_management.model.dto.professor.ProfessorResponseDTO;
@@ -101,6 +102,7 @@ public class ProfessorService {
         return new ProfessorResponseDTO(
             professor.getSiape(),
             professor.getUser().getName(),
+            professor.getUser().getSurname(),
             professor.getStatus(),
             professor.getEducation(),
             professor.getInstitutionalEmail(),
@@ -117,7 +119,9 @@ public class ProfessorService {
         );
 
         Department professorDepartment = departmentRepository.findById(professorRequestDTO.departmentId()).orElseThrow(
-                () -> new RuntimeException("Department not found")
+                () -> new DepartmentUUIDNotFoundException(
+                        String.format("Department with UUID '%s' not found", professorRequestDTO.departmentId())
+                )
         );
 
         return new Professor(

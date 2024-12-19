@@ -57,7 +57,7 @@ public class StudentController {
     }
 
     //UPDATE BY AFFILIATION ID
-    @Operation(summary = "Updates a student by its affiliation id", method = "UPDATE")
+    @Operation(summary = "Updates a student by its affiliation id", method = "PUT")
     @PutMapping("/{id}")
     public ResponseEntity<StudentResponseDTO> updateStudentByAffiliationId(@PathVariable UUID id, @Valid @RequestBody StudentRequestDTO studentUpdateDTO) {
         return ResponseEntity.status(HttpStatus.OK).body(service.updateStudentByAffiliationId(id, studentUpdateDTO));

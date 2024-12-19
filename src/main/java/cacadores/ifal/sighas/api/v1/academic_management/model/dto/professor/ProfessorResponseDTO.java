@@ -12,6 +12,7 @@ import java.time.LocalDateTime;
 public record ProfessorResponseDTO(
     String siape,
     String name,
+    String surname,
     AffiliationStatus status,
     EducationLevel education,
     String institutionalEmail,

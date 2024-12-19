@@ -57,7 +57,7 @@ public class SubjectController {
     }
 
     //UPDATE
-    @Operation(summary = "Updates a subject by its id", method = "UPDATE")
+    @Operation(summary = "Updates a subject by its id", method = "PUT")
     @PutMapping("/{id}")
     public ResponseEntity<SubjectResponseDTO> updateGroup(@PathVariable UUID id, @Valid @RequestBody SubjectRequestDTO subjectUpdateDTO) {
         return ResponseEntity.status(HttpStatus.OK).body(service.updateGroup(id, subjectUpdateDTO));

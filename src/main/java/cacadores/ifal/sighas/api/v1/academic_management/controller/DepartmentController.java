@@ -57,7 +57,7 @@ public class DepartmentController {
     }
 
     //UPDATE
-    @Operation(summary = "Updates a department by its id", method = "UPDATE")
+    @Operation(summary = "Updates a department by its id", method = "PUT")
     @PutMapping("/{id}")
     public ResponseEntity<DepartmentResponseDTO> updateDepartment(@PathVariable UUID id, @Valid @RequestBody DepartmentRequestDTO departmentUpdateDTO) {
         return ResponseEntity.status(HttpStatus.OK).body(service.updateDepartment(id, departmentUpdateDTO));

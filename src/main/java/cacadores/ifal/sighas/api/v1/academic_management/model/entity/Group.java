@@ -2,6 +2,7 @@ package cacadores.ifal.sighas.api.v1.academic_management.model.entity;
 
 import cacadores.ifal.sighas.api.v1.academic_management.model.enums.GroupStatus;
 
+import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -17,6 +18,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
 import java.util.Set;
 import java.util.UUID;
 
@@ -47,13 +49,17 @@ public class Group {
     @OneToMany(mappedBy = "group")
     private Set<AcademicLessonReservation> schedules;
 
+    @Embedded
+    private AcademicPeriod academicPeriod;
+
     private GroupStatus status;
+    private LocalDateTime createdAt;
 
-    //TODO: add academicPeriod attribute
-
-    public Group(String code, Subject subject, GroupStatus status) {
+    public Group(String code, Subject subject, AcademicPeriod academicPeriod, GroupStatus status) {
         this.code = code;
         this.subject = subject;
+        this.academicPeriod = academicPeriod;
         this.status = status;
+        this.createdAt = LocalDateTime.now();
     }
 }

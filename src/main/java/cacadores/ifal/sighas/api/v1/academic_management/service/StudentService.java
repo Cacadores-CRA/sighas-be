@@ -98,14 +98,14 @@ public class StudentService {
 
     //REQUEST DTO TO ENTITY
     private Student toStudent(StudentRequestDTO studentRequestDTO) {
-        User user = userRepository.findById(studentRequestDTO.userId()).orElseThrow(
+        User studentUser = userRepository.findById(studentRequestDTO.userId()).orElseThrow(
             () -> new UserUUIDNotFoundException(
                 String.format("User with UUID '%s' not found", studentRequestDTO.userId())
             )
         );
 
         return new Student(
-            user,
+            studentUser,
             studentRequestDTO.startingDate(),
             studentRequestDTO.endingDate(),
             studentRequestDTO.status(),

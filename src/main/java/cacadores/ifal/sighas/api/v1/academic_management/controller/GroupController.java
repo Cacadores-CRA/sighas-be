@@ -14,6 +14,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -31,6 +32,7 @@ import java.util.UUID;
 //TODO: Complete documentation
 public class GroupController {
     private final GroupService service;
+
     public GroupController(GroupService groupService) {
         this.service = groupService;
     }
@@ -57,7 +59,7 @@ public class GroupController {
     }
 
     //UPDATE
-    @Operation(summary = "Updates a group by its id", method = "UPDATE")
+    @Operation(summary = "Updates a group by its ID", method = "PUT")
     @PutMapping("/{id}")
     public ResponseEntity<GroupResponseDTO> updateGroup(@PathVariable UUID id, @Valid @RequestBody GroupRequestDTO groupUpdateDTO) {
         return ResponseEntity.status(HttpStatus.OK).body(service.updateGroup(id, groupUpdateDTO));
@@ -69,5 +71,19 @@ public class GroupController {
     public ResponseEntity<Void> deleteGroup(@PathVariable UUID id) {
         service.deleteGroup(id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+    }
+
+    //ADD PROFESSORS TO GROUP
+    @Operation(summary = "Adds professors (given their siape codes) to a group (given its ID)", method = "PATCH")
+    @PatchMapping("/{id}/addProfessors")
+    public ResponseEntity<GroupResponseDTO> addsProfessorsToGroup(@PathVariable UUID id, @RequestBody List<String> professorsSiapeCodes) {
+        return ResponseEntity.status(HttpStatus.OK).body(service.addsProfessorsToGroup(id, professorsSiapeCodes));
+    }
+
+    //ADD STUDENTS TO GROUP
+    @Operation(summary = "Adds students (given their enrollment codes) to a group (given its ID)", method = "PATCH")
+    @PatchMapping("/{id}/addStudents")
+    public ResponseEntity<GroupResponseDTO> addsStudentsToGroup(@PathVariable UUID id, @RequestBody List<String> studentsEnrollmentCodes) {
+        return ResponseEntity.status(HttpStatus.OK).body(service.addsStudentsToGroup(id, studentsEnrollmentCodes));
     }
 }

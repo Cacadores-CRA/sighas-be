@@ -12,6 +12,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
 import java.util.Set;
 import java.util.UUID;
 
@@ -27,14 +28,17 @@ public class Subject {
 
     private String code;
     private String title;
-    private String shortTile;
+    private String shortTitle;
 
     @ManyToMany(fetch = FetchType.LAZY)
     private Set<Course> courses;
 
-    public Subject(String code, String title, String shortTile) {
+    LocalDateTime createdAt;
+
+    public Subject(String code, String title, String shortTitle) {
         this.code = code;
         this.title = title;
-        this.shortTile = shortTile;
+        this.shortTitle = shortTitle;
+        LocalDateTime now = LocalDateTime.now();
     }
 }

@@ -57,7 +57,7 @@ public class CourseController {
     }
 
     //UPDATE
-    @Operation(summary = "Updates a course by its id", method = "UPDATE")
+    @Operation(summary = "Updates a course by its id", method = "PUT")
     @PutMapping("/{id}")
     public ResponseEntity<CourseResponseDTO> updateDepartment(@PathVariable UUID id, @Valid @RequestBody CourseRequestDTO courseUpdateDTO) {
         return ResponseEntity.status(HttpStatus.OK).body(service.updateCourse(id, courseUpdateDTO));

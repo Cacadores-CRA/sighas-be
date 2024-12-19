@@ -59,7 +59,7 @@ public class SubjectService {
         
         savedSubject.setCode(subjectUpdateDTO.code());
         savedSubject.setTitle(subjectUpdateDTO.title());
-        savedSubject.setShortTile(subjectUpdateDTO.shortTitle());
+        savedSubject.setShortTitle(subjectUpdateDTO.shortTitle());
 
         return this.toSubjectResponseDTO(repository.save(savedSubject));
     }
@@ -78,9 +78,11 @@ public class SubjectService {
 
     private SubjectResponseDTO toSubjectResponseDTO(Subject subject) {
         return new SubjectResponseDTO(
+            subject.getId(),
             subject.getCode(),
             subject.getTitle(),
-            subject.getShortTile()
+            subject.getShortTitle(),
+            subject.getCreatedAt()
         );
     }
 
