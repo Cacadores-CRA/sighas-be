@@ -88,6 +88,7 @@ public class StudentService {
     //ENTITY TO RESPONSE DTO
     protected StudentResponseDTO toStudentResponseDTO(Student student) {
         return new StudentResponseDTO(
+            student.getUser().getId(),
             student.getUser().getName(),
             student.getStatus(),
             student.getEnrollment(),

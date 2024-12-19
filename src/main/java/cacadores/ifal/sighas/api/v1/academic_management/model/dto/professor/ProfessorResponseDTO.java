@@ -7,9 +7,11 @@ import cacadores.ifal.sighas.api.v1.academic_management.model.enums.EducationLev
 import io.swagger.v3.oas.annotations.media.Schema;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Schema(description = "DTO used to represent professors in responses")
 public record ProfessorResponseDTO(
+    UUID userId,
     String siape,
     String name,
     String surname,

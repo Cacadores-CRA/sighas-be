@@ -20,6 +20,7 @@ public class AdministrativePublicServantService {
     //ENTITY TO RESPONSE DTO
     protected AdministrativePublicServantResponseDTO toAdministrativePublicServantResponseDTO(AdministrativePublicServant administrativePublicServant) {
         return new AdministrativePublicServantResponseDTO(
+                administrativePublicServant.getUser().getId(),
                 administrativePublicServant.getUser().getName()
         );
     }

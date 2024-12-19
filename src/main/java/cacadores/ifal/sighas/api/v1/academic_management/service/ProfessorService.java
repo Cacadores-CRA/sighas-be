@@ -100,6 +100,7 @@ public class ProfessorService {
     //ENTITY TO RESPONSE DTO
     protected ProfessorResponseDTO toProfessorResponseDTO(Professor professor) {
         return new ProfessorResponseDTO(
+            professor.getUser().getId(),
             professor.getSiape(),
             professor.getUser().getName(),
             professor.getUser().getSurname(),
