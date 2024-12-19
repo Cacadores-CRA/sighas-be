@@ -76,15 +76,29 @@ public class GroupController {
     //ADDS A PROFESSOR TO GROUP
     @Operation(summary = "Adds a professor (given its siape code) to a group (given its ID)", method = "PATCH")
     @PatchMapping("/{id}/addProfessor/{siape}")
-    public ResponseEntity<GroupResponseDTO> addsProfessorToGroup(@PathVariable UUID id, @PathVariable String siape) {
-        return ResponseEntity.status(HttpStatus.OK).body(service.addsProfessorToGroup(id, siape));
+    public ResponseEntity<GroupResponseDTO> addsProfessorToGroup(@PathVariable UUID id, @PathVariable(value = "siape") String siapeCode) {
+        return ResponseEntity.status(HttpStatus.OK).body(service.addsProfessorToGroup(id, siapeCode));
+    }
+
+    //REMOVES A PROFESSOR FROM GROUP
+    @Operation(summary = "Removes a professor (given its siape code) from a group (given its ID)", method = "PATCH")
+    @PatchMapping("/{id}/removeProfessor/{siape}")
+    public ResponseEntity<GroupResponseDTO> removesProfessorFromGroup(@PathVariable UUID id, @PathVariable(value = "siape") String siapeCode) {
+        return ResponseEntity.status(HttpStatus.OK).body(service.removesProfessorFromGroup(id, siapeCode));
     }
 
     //ADDS A STUDENT TO GROUP
     @Operation(summary = "Adds a student (given its enrollment code) to a group (given its ID)", method = "PATCH")
     @PatchMapping("/{id}/addStudent/{enrollment}")
-    public ResponseEntity<GroupResponseDTO> addsStudentToGroup(@PathVariable UUID id, @PathVariable String enrollment) {
-        return ResponseEntity.status(HttpStatus.OK).body(service.addsStudentToGroup(id, enrollment));
+    public ResponseEntity<GroupResponseDTO> addsStudentToGroup(@PathVariable UUID id, @PathVariable(value = "enrollment") String enrollmentCode) {
+        return ResponseEntity.status(HttpStatus.OK).body(service.addsStudentToGroup(id, enrollmentCode));
+    }
+
+    //REMOVES A STUDENT FROM GROUP
+    @Operation(summary = "Removes a student (given its enrollment code) from a group (given its ID)", method = "PATCH")
+    @PatchMapping("/{id}/removeStudent/{enrollment}")
+    public ResponseEntity<GroupResponseDTO> removesStudentFromGroup(@PathVariable UUID id, @PathVariable(value = "enrollment") String enrollmentCode) {
+        return ResponseEntity.status(HttpStatus.OK).body(service.removesStudentFromGroup(id, enrollmentCode));
     }
 
     //ADDS PROFESSORS TO GROUP

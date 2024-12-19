@@ -105,23 +105,63 @@ public class GroupService {
 
     //ADDS A PROFESSOR TO GROUP
     @Transactional
+    public GroupResponseDTO addsProfessorToGroup(UUID id, String siapeCode) {
+        Group group = this.repository.findById(id).orElseThrow(
+            () -> new GroupUUIDNotFoundException(
+                String.format("Group with UUID '%s' not found", id)
+            )
+        );
+
+        Professor professor = professorRepository.findBySiape(siapeCode).orElseThrow(
+            () -> new ProfessorSiapeNotFoundException(
+                String.format("Professor with siape code '%s' not found", siapeCode)
+            )
+        );
+
+        group.getProfessors().add(professor);
+
+        return this.toGroupResponseDTO(repository.save(group));
+    }
+
+    //REMOVES A PROFESSOR FROM GROUP
+    @Transactional
+    public GroupResponseDTO removesProfessorFromGroup(UUID id, String siapeCode) {
+        Group group = this.repository.findById(id).orElseThrow(
+            () -> new GroupUUIDNotFoundException(
+                String.format("Group with UUID '%s' not found", id)
+            )
+        );
+
+        Professor professor = professorRepository.findBySiape(siapeCode).orElseThrow(
+            () -> new ProfessorSiapeNotFoundException(
+                String.format("Professor with siape code '%s' not found", siapeCode)
+            )
+        );
+
+        group.getProfessors().remove(professor);
+
+        return this.toGroupResponseDTO(repository.save(group));
+    }
+
+    //ADDS PROFESSORS TO GROUP
+    @Transactional
     public GroupResponseDTO addsProfessorsToGroup(UUID id, List<String> professorsSiapeCodes) {
         Group group = this.repository.findById(id).orElseThrow(
-                () -> new GroupUUIDNotFoundException(
-                        String.format("Group with UUID '%s' not found", id)
-                )
+            () -> new GroupUUIDNotFoundException(
+                String.format("Group with UUID '%s' not found", id)
+            )
         );
 
         new HashSet<>(professorsSiapeCodes).forEach(
-                professorSiapeCode -> {
-                    Professor professor = professorRepository.findBySiape(professorSiapeCode).orElseThrow(
-                            () -> new ProfessorSiapeNotFoundException(
-                                    String.format("Professor with UUID %s not found", professorSiapeCode)
-                            )
-                    );
+            professorSiapeCode -> {
+                Professor professor = professorRepository.findBySiape(professorSiapeCode).orElseThrow(
+                    () -> new ProfessorSiapeNotFoundException(
+                        String.format("Professor with siape code '%s' not found", professorSiapeCode)
+                    )
+                );
 
-                    group.getProfessors().add(professor);
-                }
+                group.getProfessors().add(professor);
+            }
         );
 
         return this.toGroupResponseDTO(repository.save(group));
@@ -129,16 +169,16 @@ public class GroupService {
 
     //ADDS A STUDENT TO GROUP
     @Transactional
-    public GroupResponseDTO addsStudentToGroup(UUID id, String enrollment) {
+    public GroupResponseDTO addsStudentToGroup(UUID id, String enrollmentCode) {
         Group group = this.repository.findById(id).orElseThrow(
             () -> new GroupUUIDNotFoundException(
                 String.format("Group with UUID '%s' not found", id)
             )
         );
 
-        Student student = studentRepository.findByEnrollment(enrollment).orElseThrow(
+        Student student = studentRepository.findByEnrollment(enrollmentCode).orElseThrow(
             () -> new StudentEnrollmentNotFoundException(
-                String.format("Student with enrollment code '%s' not found", enrollment)
+                String.format("Student with enrollment code '%s' not found", enrollmentCode)
             )
         );
 
@@ -147,22 +187,22 @@ public class GroupService {
         return this.toGroupResponseDTO(repository.save(group));
     }
 
-    //ADDS A PROFESSOR TO GROUP
+    //REMOVES A STUDENT FROM GROUP
     @Transactional
-    public GroupResponseDTO addsProfessorToGroup(UUID id, String siape) {
+    public GroupResponseDTO removesStudentFromGroup(UUID id, String enrollmentCode) {
         Group group = this.repository.findById(id).orElseThrow(
             () -> new GroupUUIDNotFoundException(
                 String.format("Group with UUID '%s' not found", id)
             )
         );
 
-        Professor professor = professorRepository.findBySiape(siape).orElseThrow(
-            () -> new ProfessorSiapeNotFoundException(
-                String.format("Professor with UUID %s not found", siape)
+        Student student = studentRepository.findByEnrollment(enrollmentCode).orElseThrow(
+            () -> new StudentEnrollmentNotFoundException(
+                String.format("Student with enrollment code '%s' not found", enrollmentCode)
             )
         );
 
-        group.getProfessors().add(professor);
+        group.getStudents().remove(student);
 
         return this.toGroupResponseDTO(repository.save(group));
     }
