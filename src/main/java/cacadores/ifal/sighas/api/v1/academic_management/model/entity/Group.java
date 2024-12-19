@@ -2,8 +2,13 @@ package cacadores.ifal.sighas.api.v1.academic_management.model.entity;
 
 import cacadores.ifal.sighas.api.v1.academic_management.model.enums.GroupStatus;
 
+import jakarta.persistence.AttributeOverride;
+import jakarta.persistence.AttributeOverrides;
+import jakarta.persistence.Column;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -50,9 +55,15 @@ public class Group {
     private Set<AcademicLessonReservation> schedules;
 
     @Embedded
+    @AttributeOverrides({
+        @AttributeOverride(name = "year", column = @Column(name = "academic_year")),
+        @AttributeOverride(name = "semester", column = @Column(name = "academic_semester"))
+    })
     private AcademicPeriod academicPeriod;
 
+    @Enumerated(EnumType.STRING)
     private GroupStatus status;
+
     private LocalDateTime createdAt;
 
     public Group(String code, Subject subject, AcademicPeriod academicPeriod, GroupStatus status) {

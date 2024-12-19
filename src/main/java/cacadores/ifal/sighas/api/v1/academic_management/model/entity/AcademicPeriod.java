@@ -4,6 +4,8 @@ import cacadores.ifal.sighas.api.v1.academic_management.model.enums.YearSemester
 
 import jakarta.persistence.Embeddable;
 
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -16,6 +18,8 @@ import java.time.Year;
 @Embeddable
 public class AcademicPeriod {
     private Year year;
+
+    @Enumerated(EnumType.STRING)
     private YearSemester semester;
 
     public AcademicPeriod(Integer year, YearSemester semester) {

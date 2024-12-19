@@ -73,14 +73,28 @@ public class GroupController {
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
-    //ADD PROFESSORS TO GROUP
+    //ADDS A PROFESSOR TO GROUP
+    @Operation(summary = "Adds a professor (given its siape code) to a group (given its ID)", method = "PATCH")
+    @PatchMapping("/{id}/addProfessor/{siape}")
+    public ResponseEntity<GroupResponseDTO> addsProfessorToGroup(@PathVariable UUID id, @PathVariable String siape) {
+        return ResponseEntity.status(HttpStatus.OK).body(service.addsProfessorToGroup(id, siape));
+    }
+
+    //ADDS A STUDENT TO GROUP
+    @Operation(summary = "Adds a student (given its enrollment code) to a group (given its ID)", method = "PATCH")
+    @PatchMapping("/{id}/addStudent/{enrollment}")
+    public ResponseEntity<GroupResponseDTO> addsStudentToGroup(@PathVariable UUID id, @PathVariable String enrollment) {
+        return ResponseEntity.status(HttpStatus.OK).body(service.addsStudentToGroup(id, enrollment));
+    }
+
+    //ADDS PROFESSORS TO GROUP
     @Operation(summary = "Adds professors (given their siape codes) to a group (given its ID)", method = "PATCH")
     @PatchMapping("/{id}/addProfessors")
     public ResponseEntity<GroupResponseDTO> addsProfessorsToGroup(@PathVariable UUID id, @RequestBody List<String> professorsSiapeCodes) {
         return ResponseEntity.status(HttpStatus.OK).body(service.addsProfessorsToGroup(id, professorsSiapeCodes));
     }
 
-    //ADD STUDENTS TO GROUP
+    //ADDS STUDENTS TO GROUP
     @Operation(summary = "Adds students (given their enrollment codes) to a group (given its ID)", method = "PATCH")
     @PatchMapping("/{id}/addStudents")
     public ResponseEntity<GroupResponseDTO> addsStudentsToGroup(@PathVariable UUID id, @RequestBody List<String> studentsEnrollmentCodes) {
