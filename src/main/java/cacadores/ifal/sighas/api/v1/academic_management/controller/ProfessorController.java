@@ -51,9 +51,16 @@ public class ProfessorController {
 
     //READ BY AFFILIATION ID
     @Operation(summary = "Gets a professor by its affiliation ID", method = "GET")
-    @GetMapping("/{id}")
+    @GetMapping("/affiliation/{id}")
     public ResponseEntity<ProfessorResponseDTO> getProfessorByAffiliationId(@PathVariable UUID id) {
         return ResponseEntity.status(HttpStatus.OK).body(service.getProfessorByAffiliationId(id));
+    }
+
+    //READ BY SIAPE CODE
+    @Operation(summary = "Gets a professor by its siape code", method = "GET")
+    @GetMapping("/siape/{siape}")
+    public ResponseEntity<ProfessorResponseDTO> getProfessorBySiapeCode(@PathVariable(value = "siape") String siapeCode) {
+        return ResponseEntity.status(HttpStatus.OK).body(service.getProfessorBySiapeCode(siapeCode));
     }
 
     //UPDATE BY AFFILIATION ID

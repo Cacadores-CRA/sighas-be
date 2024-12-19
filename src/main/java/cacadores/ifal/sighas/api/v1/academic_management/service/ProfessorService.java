@@ -2,6 +2,7 @@ package cacadores.ifal.sighas.api.v1.academic_management.service;
 
 import cacadores.ifal.sighas.api.v1.academic_management.exception.affiliation.AffiliationUUIDNotFoundException;
 import cacadores.ifal.sighas.api.v1.academic_management.exception.department.DepartmentUUIDNotFoundException;
+import cacadores.ifal.sighas.api.v1.academic_management.exception.professor.ProfessorSiapeNotFoundException;
 import cacadores.ifal.sighas.api.v1.academic_management.exception.user.UserUUIDNotFoundException;
 import cacadores.ifal.sighas.api.v1.academic_management.model.dto.professor.ProfessorRequestDTO;
 import cacadores.ifal.sighas.api.v1.academic_management.model.dto.professor.ProfessorResponseDTO;
@@ -52,6 +53,17 @@ public class ProfessorService {
                     String.format("Professor with affiliation id '%s' not found", affiliationId)
                 )
             )
+        );
+    }
+
+    //READ BY SIAPE CODE
+    public ProfessorResponseDTO getProfessorBySiapeCode(String siapeCode) {
+        return this.toProfessorResponseDTO(
+                repository.findBySiape(siapeCode).orElseThrow(
+                        () -> new ProfessorSiapeNotFoundException(
+                                String.format("Professor with affiliation id '%s' not found", siapeCode)
+                        )
+                )
         );
     }
 
