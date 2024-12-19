@@ -69,10 +69,10 @@ public class ProfessorService {
             )
         );
 
-        //TODO: Implement custom exception
-        Department savedDepartment = departmentRepository.findById(professorUpdateDTO.departmentId()).orElseThrow(
-                () -> new RuntimeException("Department not found")
-        );
+//        //TODO: Implement custom exception
+//        Department savedDepartment = departmentRepository.findById(professorUpdateDTO.departmentId()).orElseThrow(
+//                () -> new RuntimeException("Department not found")
+//        );
 
         savedProfessor.setUser(savedUser);
         savedProfessor.setStartingDate(professorUpdateDTO.startingDate());
@@ -80,7 +80,7 @@ public class ProfessorService {
         savedProfessor.setStatus(professorUpdateDTO.status());
         savedProfessor.setSiape(professorUpdateDTO.siape());
         savedProfessor.setEducation(professorUpdateDTO.education());
-        savedProfessor.setDepartment(savedDepartment);
+//        savedProfessor.setDepartment(savedDepartment);
         savedProfessor.setInstitutionalEmail(professorUpdateDTO.institutionalEmail());
 
         return this.toProfessorResponseDTO(repository.save(savedProfessor));
@@ -111,30 +111,49 @@ public class ProfessorService {
         );
     }
 
+//    //REQUEST DTO TO ENTITY
+//    private Professor toProfessor(ProfessorRequestDTO professorRequestDTO) {
+//        User professorUser = userRepository.findById(professorRequestDTO.userId()).orElseThrow(
+//            () -> new UserUUIDNotFoundException(
+//                String.format("User with UUID '%s' not found", professorRequestDTO.userId())
+//            )
+//        );
+//
+//        Department professorDepartment = departmentRepository.findById(professorRequestDTO.departmentId()).orElseThrow(
+//                () -> new DepartmentUUIDNotFoundException(
+//                        String.format("Department with UUID '%s' not found", professorRequestDTO.departmentId())
+//                )
+//        );
+//
+//        return new Professor(
+//            professorUser,
+//            professorRequestDTO.startingDate(),
+//            professorRequestDTO.endingDate(),
+//            professorRequestDTO.status(),
+//            professorRequestDTO.siape(),
+//            professorRequestDTO.education(),
+//            //TODO: Check it out if department is obligatory
+//            professorDepartment,
+//            professorRequestDTO.institutionalEmail()
+//        );
+//    }
+
     //REQUEST DTO TO ENTITY
     private Professor toProfessor(ProfessorRequestDTO professorRequestDTO) {
         User professorUser = userRepository.findById(professorRequestDTO.userId()).orElseThrow(
-            () -> new UserUUIDNotFoundException(
-                String.format("User with UUID '%s' not found", professorRequestDTO.userId())
-            )
-        );
-
-        Department professorDepartment = departmentRepository.findById(professorRequestDTO.departmentId()).orElseThrow(
-                () -> new DepartmentUUIDNotFoundException(
-                        String.format("Department with UUID '%s' not found", professorRequestDTO.departmentId())
+                () -> new UserUUIDNotFoundException(
+                        String.format("User with UUID '%s' not found", professorRequestDTO.userId())
                 )
         );
 
         return new Professor(
-            professorUser,
-            professorRequestDTO.startingDate(),
-            professorRequestDTO.endingDate(),
-            professorRequestDTO.status(),
-            professorRequestDTO.siape(),
-            professorRequestDTO.education(),
-            //TODO: Check it out if department is obligatory
-            professorDepartment,
-            professorRequestDTO.institutionalEmail()
+                professorUser,
+                professorRequestDTO.startingDate(),
+                professorRequestDTO.endingDate(),
+                professorRequestDTO.status(),
+                professorRequestDTO.siape(),
+                professorRequestDTO.education(),
+                professorRequestDTO.institutionalEmail()
         );
     }
 }

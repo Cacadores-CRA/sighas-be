@@ -33,8 +33,8 @@ public record ProfessorRequestDTO(
         @NotNull(message = "Invalid education level")
         EducationLevel education,
 
-        @NotNull(message = "Department ID is obligatory")
-        UUID departmentId,
+//        @NotNull(message = "Department ID is obligatory")
+//        UUID departmentId,
 
         @Email(message = "Invalid email address")
         //TODO: Implement RegExr

@@ -54,4 +54,18 @@ public class Professor extends PublicServant {
 
         this.institutionalEmail = institutionalEmail;
     }
+
+    public Professor(User user, LocalDate startingDate, LocalDate endingDate, AffiliationStatus status,
+                     String siape, EducationLevel education, String institutionalEmail) {
+        this.setUser(user);
+        this.setStartingDate(startingDate);
+        this.setEndingDate(endingDate);
+        this.setStatus(status);
+        this.setCreatedAt(LocalDateTime.now());
+
+        this.setSiape(siape);
+        this.setEducation(education);
+
+        this.institutionalEmail = institutionalEmail;
+    }
 }
