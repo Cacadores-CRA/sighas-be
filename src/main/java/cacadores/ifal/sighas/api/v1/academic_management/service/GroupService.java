@@ -2,7 +2,7 @@ package cacadores.ifal.sighas.api.v1.academic_management.service;
 
 import cacadores.ifal.sighas.api.v1.academic_management.exception.group.GroupUUIDNotFoundException;
 import cacadores.ifal.sighas.api.v1.academic_management.exception.professor.ProfessorSiapeCodeNotFoundException;
-import cacadores.ifal.sighas.api.v1.academic_management.exception.student.StudentEnrollmentNotFoundException;
+import cacadores.ifal.sighas.api.v1.academic_management.exception.student.StudentEnrollmentCodeNotFoundException;
 import cacadores.ifal.sighas.api.v1.academic_management.exception.subject.SubjectUUIDNotFoundException;
 import cacadores.ifal.sighas.api.v1.academic_management.model.dto.group.GroupRequestDTO;
 import cacadores.ifal.sighas.api.v1.academic_management.model.dto.group.GroupResponseDTO;
@@ -177,7 +177,7 @@ public class GroupService {
         );
 
         Student student = studentRepository.findByEnrollment(enrollmentCode).orElseThrow(
-            () -> new StudentEnrollmentNotFoundException(
+            () -> new StudentEnrollmentCodeNotFoundException(
                 String.format("Student with enrollment code '%s' not found", enrollmentCode)
             )
         );
@@ -197,7 +197,7 @@ public class GroupService {
         );
 
         Student student = studentRepository.findByEnrollment(enrollmentCode).orElseThrow(
-            () -> new StudentEnrollmentNotFoundException(
+            () -> new StudentEnrollmentCodeNotFoundException(
                 String.format("Student with enrollment code '%s' not found", enrollmentCode)
             )
         );
@@ -219,7 +219,7 @@ public class GroupService {
         new HashSet<>(studentsEnrollmentCodes).forEach(
             enrollmentCode -> {
                 Student student = studentRepository.findByEnrollment(enrollmentCode).orElseThrow(
-                    () -> new StudentEnrollmentNotFoundException(
+                    () -> new StudentEnrollmentCodeNotFoundException(
                         String.format("Student with enrollment code '%s' not found", enrollmentCode)
                     )
                 );

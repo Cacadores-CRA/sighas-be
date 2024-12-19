@@ -56,11 +56,25 @@ public class StudentController {
         return ResponseEntity.status(HttpStatus.OK).body(service.getStudentByAffiliationId(id));
     }
 
+    //READ BY ENROLLMENT CODE
+    @Operation(summary = "Gets a student by its enrollment code", method = "GET")
+    @GetMapping("/enrollment/{enrollment}")
+    public ResponseEntity<StudentResponseDTO> getStudentByEnrollmentCode(@PathVariable(value = "enrollment") String enrollmentCode) {
+        return ResponseEntity.status(HttpStatus.OK).body(service.getStudentByEnrollmentCode(enrollmentCode));
+    }
+
     //UPDATE BY AFFILIATION ID
     @Operation(summary = "Updates a student by its affiliation id", method = "PUT")
     @PutMapping("/{id}")
     public ResponseEntity<StudentResponseDTO> updateStudentByAffiliationId(@PathVariable UUID id, @Valid @RequestBody StudentRequestDTO studentUpdateDTO) {
         return ResponseEntity.status(HttpStatus.OK).body(service.updateStudentByAffiliationId(id, studentUpdateDTO));
+    }
+
+    //UPDATE BY ENROLLMENT CODE
+    @Operation(summary = "Updates a student by its enrollment code", method = "PUT")
+    @PutMapping("/enrollment/{enrollment}")
+    public ResponseEntity<StudentResponseDTO> updateStudentByEnrollmentCode(@PathVariable(value = "enrollment") String enrollmentCode, @Valid @RequestBody StudentRequestDTO studentUpdateDTO) {
+        return ResponseEntity.status(HttpStatus.OK).body(service.updateStudentByEnrollmentCode(enrollmentCode, studentUpdateDTO));
     }
 
     //DELETE BY AFFILIATION ID
