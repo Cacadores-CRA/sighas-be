@@ -1,12 +1,10 @@
 package cacadores.ifal.sighas.api.v1.academic_management.service;
 
 import cacadores.ifal.sighas.api.v1.academic_management.exception.affiliation.AffiliationUUIDNotFoundException;
-import cacadores.ifal.sighas.api.v1.academic_management.exception.department.DepartmentUUIDNotFoundException;
-import cacadores.ifal.sighas.api.v1.academic_management.exception.professor.ProfessorSiapeNotFoundException;
+import cacadores.ifal.sighas.api.v1.academic_management.exception.professor.ProfessorSiapeCodeNotFoundException;
 import cacadores.ifal.sighas.api.v1.academic_management.exception.user.UserUUIDNotFoundException;
 import cacadores.ifal.sighas.api.v1.academic_management.model.dto.professor.ProfessorRequestDTO;
 import cacadores.ifal.sighas.api.v1.academic_management.model.dto.professor.ProfessorResponseDTO;
-import cacadores.ifal.sighas.api.v1.academic_management.model.entity.Department;
 import cacadores.ifal.sighas.api.v1.academic_management.model.entity.Professor;
 import cacadores.ifal.sighas.api.v1.academic_management.model.entity.User;
 import cacadores.ifal.sighas.api.v1.academic_management.repository.DepartmentRepository;
@@ -60,7 +58,7 @@ public class ProfessorService {
     public ProfessorResponseDTO getProfessorBySiapeCode(String siapeCode) {
         return this.toProfessorResponseDTO(
                 repository.findBySiape(siapeCode).orElseThrow(
-                        () -> new ProfessorSiapeNotFoundException(
+                        () -> new ProfessorSiapeCodeNotFoundException(
                                 String.format("Professor with affiliation id '%s' not found", siapeCode)
                         )
                 )
@@ -93,6 +91,37 @@ public class ProfessorService {
         savedProfessor.setSiape(professorUpdateDTO.siape());
         savedProfessor.setEducation(professorUpdateDTO.education());
 //        savedProfessor.setDepartment(savedDepartment);
+        savedProfessor.setInstitutionalEmail(professorUpdateDTO.institutionalEmail());
+
+        return this.toProfessorResponseDTO(repository.save(savedProfessor));
+    }
+
+    //UPDATE BY SIAPE CODE
+    public ProfessorResponseDTO updateProfessorBySiapeCode(String siapeCode, ProfessorRequestDTO professorUpdateDTO) {
+        Professor savedProfessor = repository.findBySiape(siapeCode).orElseThrow(
+                () -> new ProfessorSiapeCodeNotFoundException(
+                        String.format("Professor with siape code '%s' not found", siapeCode)
+                )
+        );
+
+        User savedUser = userRepository.findById(professorUpdateDTO.userId()).orElseThrow(
+                () -> new UserUUIDNotFoundException(
+                        String.format("User with id '%s' not found", professorUpdateDTO.userId())
+                )
+        );
+
+        //        //TODO: Implement custom exception
+        //        Department savedDepartment = departmentRepository.findById(professorUpdateDTO.departmentId()).orElseThrow(
+        //                () -> new RuntimeException("Department not found")
+        //        );
+
+        savedProfessor.setUser(savedUser);
+        savedProfessor.setStartingDate(professorUpdateDTO.startingDate());
+        savedProfessor.setEndingDate(professorUpdateDTO.endingDate());
+        savedProfessor.setStatus(professorUpdateDTO.status());
+        savedProfessor.setSiape(professorUpdateDTO.siape());
+        savedProfessor.setEducation(professorUpdateDTO.education());
+        //        savedProfessor.setDepartment(savedDepartment);
         savedProfessor.setInstitutionalEmail(professorUpdateDTO.institutionalEmail());
 
         return this.toProfessorResponseDTO(repository.save(savedProfessor));

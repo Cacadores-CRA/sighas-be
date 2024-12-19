@@ -1,7 +1,7 @@
 package cacadores.ifal.sighas.api.v1.academic_management.service;
 
 import cacadores.ifal.sighas.api.v1.academic_management.exception.group.GroupUUIDNotFoundException;
-import cacadores.ifal.sighas.api.v1.academic_management.exception.professor.ProfessorSiapeNotFoundException;
+import cacadores.ifal.sighas.api.v1.academic_management.exception.professor.ProfessorSiapeCodeNotFoundException;
 import cacadores.ifal.sighas.api.v1.academic_management.exception.student.StudentEnrollmentNotFoundException;
 import cacadores.ifal.sighas.api.v1.academic_management.exception.subject.SubjectUUIDNotFoundException;
 import cacadores.ifal.sighas.api.v1.academic_management.model.dto.group.GroupRequestDTO;
@@ -113,7 +113,7 @@ public class GroupService {
         );
 
         Professor professor = professorRepository.findBySiape(siapeCode).orElseThrow(
-            () -> new ProfessorSiapeNotFoundException(
+            () -> new ProfessorSiapeCodeNotFoundException(
                 String.format("Professor with siape code '%s' not found", siapeCode)
             )
         );
@@ -133,7 +133,7 @@ public class GroupService {
         );
 
         Professor professor = professorRepository.findBySiape(siapeCode).orElseThrow(
-            () -> new ProfessorSiapeNotFoundException(
+            () -> new ProfessorSiapeCodeNotFoundException(
                 String.format("Professor with siape code '%s' not found", siapeCode)
             )
         );
@@ -155,7 +155,7 @@ public class GroupService {
         new HashSet<>(professorsSiapeCodes).forEach(
             professorSiapeCode -> {
                 Professor professor = professorRepository.findBySiape(professorSiapeCode).orElseThrow(
-                    () -> new ProfessorSiapeNotFoundException(
+                    () -> new ProfessorSiapeCodeNotFoundException(
                         String.format("Professor with siape code '%s' not found", professorSiapeCode)
                     )
                 );

@@ -70,6 +70,13 @@ public class ProfessorController {
         return ResponseEntity.status(HttpStatus.OK).body(service.updateProfessorByAffiliationId(id, professorUpdateDTO));
     }
 
+    //UPDATE BY SIAPE CODE
+    @Operation(summary = "Updates a professor by its siape code", method = "PUT")
+    @PutMapping("/siape/{siape}")
+    public ResponseEntity<ProfessorResponseDTO> updateProfessorBySiapeCode(@PathVariable(value = "siape") String siapeCode, @Valid @RequestBody ProfessorRequestDTO professorUpdateDTO) {
+        return ResponseEntity.status(HttpStatus.OK).body(service.updateProfessorBySiapeCode(siapeCode, professorUpdateDTO));
+    }
+
     //DELETE BY AFFILIATION ID
     @Operation(summary = "Deletes a professor by its ID", method = "DELETE")
     @DeleteMapping("/{id}")
