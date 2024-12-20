@@ -1,12 +1,20 @@
 services:
-#  sighas-be-app:
-#    build: .
-#    ports:
-#      - "8080:8080"
-#    depends_on:
-#      - database
-#    networks:
-#      - sighas-be-network
+  sighas-be-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      platforms:
+        - "linux/amd64"
+        - "linux/arm64"
+    container_name: sighas-be-app
+    ports:
+      - "8080:8080"
+    env_file:
+      - .env
+    depends_on:
+      - database
+    networks:
+      - sighas-be-network
 
   database:
     image: postgres:latest
