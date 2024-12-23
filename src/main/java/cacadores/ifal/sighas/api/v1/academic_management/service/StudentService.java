@@ -1,6 +1,7 @@
 package cacadores.ifal.sighas.api.v1.academic_management.service;
 
 import cacadores.ifal.sighas.api.v1.academic_management.exception.affiliation.AffiliationUUIDNotFoundException;
+import cacadores.ifal.sighas.api.v1.academic_management.exception.student.StudentEnrollmentCodeNotFoundException;
 import cacadores.ifal.sighas.api.v1.academic_management.exception.user.UserUUIDNotFoundException;
 import cacadores.ifal.sighas.api.v1.academic_management.model.dto.student.StudentRequestDTO;
 import cacadores.ifal.sighas.api.v1.academic_management.model.dto.student.StudentResponseDTO;
@@ -50,6 +51,17 @@ public class StudentService {
         );
     }
 
+    //READ BY ENROLLMENT CODE
+    public StudentResponseDTO getStudentByEnrollmentCode(String enrollmentCode) {
+        return this.toStudentResponseDTO(
+            repository.findByEnrollment(enrollmentCode).orElseThrow(
+                () -> new StudentEnrollmentCodeNotFoundException(
+                    String.format("Student with enrollment code '%s' not found", enrollmentCode)
+                )
+            )
+        );
+    }
+
     //UPDATE BY AFFILIATION ID
     public StudentResponseDTO updateStudentByAffiliationId(UUID affiliationId, StudentRequestDTO updateStudentDTO) {
         Student savedStudent = repository.findById(affiliationId).orElseThrow(
@@ -62,6 +74,30 @@ public class StudentService {
             () -> new UserUUIDNotFoundException(
                 String.format("User with id '%s' not found", updateStudentDTO.userId())
             )
+        );
+
+        savedStudent.setUser(savedUser);
+        savedStudent.setStartingDate(updateStudentDTO.startingDate());
+        savedStudent.setEndingDate(updateStudentDTO.endingDate());
+        savedStudent.setStatus(updateStudentDTO.status());
+        savedStudent.setEnrollment(updateStudentDTO.enrollment());
+        savedStudent.setInstitutionalEmail(updateStudentDTO.institutionalEmail());
+
+        return this.toStudentResponseDTO(repository.save(savedStudent));
+    }
+
+    //UPDATE BY ENROLLMENT CODE
+    public StudentResponseDTO updateStudentByEnrollmentCode(String enrollmentCode, StudentRequestDTO updateStudentDTO) {
+        Student savedStudent = repository.findByEnrollment(enrollmentCode).orElseThrow(
+            () -> new StudentEnrollmentCodeNotFoundException(
+                String.format("Student with enrollment code '%s' not found", enrollmentCode)
+            )
+        );
+
+        User savedUser = userRepository.findById(updateStudentDTO.userId()).orElseThrow(
+                () -> new UserUUIDNotFoundException(
+                        String.format("User with id '%s' not found", updateStudentDTO.userId())
+                )
         );
 
         savedStudent.setUser(savedUser);

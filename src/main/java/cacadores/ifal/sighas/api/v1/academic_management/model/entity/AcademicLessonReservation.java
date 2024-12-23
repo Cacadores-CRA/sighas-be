@@ -9,7 +9,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
@@ -39,7 +38,7 @@ public class AcademicLessonReservation implements Reservation {
     private Classroom classroom;
 
     @ManyToOne
-    @JoinTable(name = "group_id")
+    @JoinColumn(name = "group_id")
     private Group group;
 
     public AcademicLessonReservation(WeekDay day, LocalTime startingTime, LocalTime endingTime, Classroom classroom, Group group) {
