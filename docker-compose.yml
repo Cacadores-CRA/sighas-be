@@ -26,15 +26,15 @@ services:
     networks:
       - sighas-be-network
 
-  pgadmin:
-    image: dpage/pgadmin4:latest
-    container_name: pgadmin
-    restart: always
-    environment:
-      PGADMIN_DEFAULT_EMAIL: "admin@pgadmin.org"
-      PGADMIN_DEFAULT_PASSWORD: "admin"
-    ports:
-      - "8081:80"
+#  pgadmin:
+#    image: dpage/pgadmin4:latest
+#    container_name: pgadmin
+#    restart: always
+#    environment:
+#      PGADMIN_DEFAULT_EMAIL: "admin@pgadmin.org"
+#      PGADMIN_DEFAULT_PASSWORD: "admin"
+#    ports:
+#      - "8081:80"
 
 networks:
   sighas-be-network:
